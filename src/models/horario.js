@@ -1271,7 +1271,9 @@ horarioModel.darHorarioCon = (id,callback) =>
       if(err){throw err}
       else
       {
-
+        console.log(horarios);
+        if (JSON.stringify(horarios)!='[]')
+        {
         forEach(horarios, function(horario, index, arr)
       {
           // console.log(horario);
@@ -1286,6 +1288,10 @@ horarioModel.darHorarioCon = (id,callback) =>
           });
 
       });
+      }
+      else {
+        callback(null,false);
+      }
       }
     });
   }

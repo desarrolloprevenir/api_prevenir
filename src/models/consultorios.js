@@ -243,7 +243,7 @@ consulModule.getConsultorioIdc = (id,callback) =>
       if(err){throw err}
       else
       {
-        // console.log(consuls);
+        console.log(consuls);
         // res = res[0];
         // console.log(res);
         // res.consultorio = consuls
@@ -253,7 +253,7 @@ consulModule.getConsultorioIdc = (id,callback) =>
           // console.log(consul);
           hors.darHorarioCon(id,(err,hora)=>{
               consul.horario = hora;
-              // console.log(consul);
+              console.log(consul);
               if(index>=consuls.length-1)
               {
                 // res.consultorio = consuls;
