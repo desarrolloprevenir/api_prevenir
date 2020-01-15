@@ -1275,10 +1275,10 @@ horarioModel.darHorarioCon = (id,callback) =>
         if (JSON.stringify(horarios)!='[]')
         {
         forEach(horarios, function(horario, index, arr)
-      {
-          // console.log(horario);
-          let idc = horario.id_horario;
-          dia.darDiasEd(horario,(err,hor)=>{
+          {
+            // console.log(horario);
+            let idc = horario.id_horario;
+            dia.darDiasEd(horario,(err,hor)=>{
               // console.log(hor);
               res.push(hor);
               if(index>=horarios.length-1)
@@ -1287,7 +1287,7 @@ horarioModel.darHorarioCon = (id,callback) =>
               }
           });
 
-      });
+        });
       }
       else {
         callback(null,false);

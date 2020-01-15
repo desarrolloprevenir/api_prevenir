@@ -269,12 +269,12 @@ citasIModule.nuevaCita = (cita,callback)=>{
 citasIModule.citaMascotas = (cita,callback)=>{
   if(connection)
   {
-      // console.log(cita)
+      console.log(cita)
       if(cita.existe == true)
       {
           if(cita.existem == true )
           {
-            // console.log('existe  la mascota y el usuario');
+            console.log('existe  la mascota y el usuario');
             // console.log(cita);
             // console.log(inse_masc);
               //*****************************************************************************************************//
@@ -299,7 +299,7 @@ citasIModule.citaMascotas = (cita,callback)=>{
               color: cita.color,
               start: starts,
               end: ends,
-              usuario: cita.id_mascota,
+              usuario: cita.idMascota,
               servicio: cita.servicio,
               mascota:cita.mascota,
               consultorio:cita.consultorio

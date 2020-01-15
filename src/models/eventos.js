@@ -145,8 +145,8 @@ if(err){throw err}else{callback(null,row);}
 //agrega los eventos a la base de datos
 eventmodule.agregarEvento = (events,callback) =>{
 if(connection){
-  // console.log('*/*/*/*/*/*/*/*/*/*');
-// console.log(events);
+  console.log('*/*/*/*/*EVENTOS AGREGAR/*/*/*/*/*');
+console.log(events);
 //console.lo.log(events.servicio+'///////////*************************');
 if(events.mascota==true)
 {
@@ -219,7 +219,7 @@ if(connection){
 //console.lo.log(events.servicio+'///////////*************************');
 if(events.mascota==true)
 {
-  // console.log('mascota');
+  console.log('mascota');
   var sql = 'INSERT INTO events_masc(color,start,end,id_mascotas,id_consultorio) VALUES (?,?,?,?,?)';
   var valida = 'SELECT createdAT,start FROM events_masc where id_mascotas = ? and DATE(start) = DATE(?); ';
 }
@@ -228,6 +228,7 @@ else
   // console.log('humano');
   var sql = 'INSERT INTO events(color,start,end,usuarios_id,id_consultorio) VALUES (?,?,?,?,?)';
   var valida = 'SELECT createdAT,start FROM events where usuarios_id = ? and DATE(start) = DATE(?); ';
+
 }
 
 connection.query(valida,[events.usuario,events.start],(err,res)=>{
@@ -239,8 +240,8 @@ else {
 // console.log(res);
 if(JSON.stringify(res)=='[]')
 {
-  // console.log('EVENTS EN AGREGAR EVENTO ********');
-  // console.log(events);
+  console.log('EVENTS EN AGREGAR EVENTO ********');
+  console.log(events);
 connection.query(sql,[events.color,events.start,events.end,events.usuario,events.consultorio],(err,row)=>{
 if(err){throw err}
   else
@@ -283,15 +284,16 @@ if(err){throw err}
               console.log('PLAYERS PROVEDOR');
               console.log(players);
         }
-            console.log(players);
+            // console.log(players);
         connection.query(med,[events.consultorio],(err,rmed)=>{
           if(err){throw err}
           else
           {
+
             rmed = rmed[0];
             console.log('MEDICOS');
             console.log(rmed);
-            if(rmed.tokenpsh!='not')
+            if(rmed.tokenpsh!='not' || rmed == undefined || rmed == 'undefined')
             {
                   players.push(rmed.rmed)
                   console.log('PLAYERS MEDICOS');
@@ -448,9 +450,10 @@ let evs = {
   id:ev.ide,
   sql:psh
 };
-eject.eliminaNotifica(evs,(err,rowss)=>{
-  if(rowss.borrado==true)
-  {
+// eject.eliminaNotifica(evs,(err,rowss)=>{
+  // console.log(rowss);
+  // if(rowss.borrado==true)
+  // {
     connection.query(sql,[ev.ide,ev.idc],(err,row)=>{
     if(err){throw err}
     else
@@ -458,8 +461,8 @@ eject.eliminaNotifica(evs,(err,rowss)=>{
     callback(null,[{'borrado':true}])
     }
     });
-  }
-});
+  // }
+// });
 }
 });
 

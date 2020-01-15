@@ -33,7 +33,7 @@ app.post('/citai',jwt.validaAdmin,(req,res)=>{
   let masc = req.body.mascota;
   if(masc==true)
   {
-    // console.log('mascota = a true');
+    console.log('mascota = a true');
       internas.citaMascotas(cita,(err,resp)=>{
         res.json(resp);
       });
