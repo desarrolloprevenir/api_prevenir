@@ -417,6 +417,24 @@ histClinModule.darimpresionDiagnostica = (callback) => {
 };
 
 
+histClinModule.darHistClinCedSer = (ids, callback) => {
+  if(connection)
+  {
+    console.log('historia por cedula y por idservicio');
+    console.log(ids);
+    let sql = "SELECT historia_clinica.*,CONVERT_TZ(historia_clinica.createdAd,'+00:00','-05:00') as createdAd FROM historia_clinica, usuarios WHERE historia_clinica.usuarios_id = usuarios.id AND usuarios.cedula = ? AND id_servicios = ?;";
+    connection.query(sql,[ids.ced, ids.ser],(err,rhcl)=>{
+        if(err){throw err}
+        else
+        {
+          callback(null,rhcl);
+        }
+    });
+  }
+};
+
+
+//retorna la historia clinica completa segun el id de la misma
 histClinModule.darHistoriaClinicaFin = (idc,callback) =>
 {
   if(connection)

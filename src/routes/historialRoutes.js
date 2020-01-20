@@ -1,5 +1,6 @@
 const hist = require('../models/historial');
 let comen = require('../models/comentarios');
+let histc = require('../models/historiasClinicas');
 const jwts = require('../models/jwt');
 
 module.exports=function(app)
@@ -69,7 +70,7 @@ app.get('/histusuced/:idser/:ced',(req,res)=>{
       ser: req.params.idser,
       ced: req.params.ced
     }
-  hist.historiaUsuCed(ids,(err,resp)=>{
+  histc.darHistClinCedSer(ids,(err,resp)=>{
     res.json(resp)
   });
 });
