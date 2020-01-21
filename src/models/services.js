@@ -76,7 +76,7 @@ servmodule.save = (data , callback ) => {
             var fotos = foto.base64Image;
             var pathView = "/servicios/"+name;
             var newPath = "src/public/servicios/"+name;
-            pathView = pathView+".jpeg";
+            pathView = pathView;
             ba64.writeImageSync(newPath, fotos);
             var fotoe = {
               nombre:name,

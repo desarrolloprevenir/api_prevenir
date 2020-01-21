@@ -232,7 +232,7 @@ fotoModel.delFotoServm = (ser,callback)=>{
             connection.query(sql,[ser.id],(err,resp)=>{if(err){throw err}
           else
         {
-          // //console.log(.log(resp);
+          console.log(resp);
           callback(null,true);
         }});
           }
@@ -240,7 +240,7 @@ fotoModel.delFotoServm = (ser,callback)=>{
           }
           else
           {
-            //console.log(.log('no existe');
+            console.log('no existe');
             callback(null,false)
           }
       });
