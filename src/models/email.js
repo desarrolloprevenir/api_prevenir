@@ -87,7 +87,7 @@ var mailOptions = {
   to: usu.to,
   subject: 'ACTIVACION CUENTA',
   text: usu.texto,
-  html: '<img src="http://cdn.prevenirexpress.com:3000/avatars/banner1a.png" alt="prevenir logo" width="50%" height="70%">'+
+  html: '<img src="http://cdn.prevenirexpress.com:3000/avatars/imagenCorreo.png" alt="prevenir logo" width="100%">'+
 
   '</br></br><h3>BIENVENIDO A PREVENIR EXPRESS</h3></br><div>Gracias por ser parte de nuesta familia '+
           'en donde encontraras los mejores decuentos medicos de tu ciudad, por favor ingresa este codigo en la aplicacion: <h2>'+ usu.pss + '</h2></div>'};
@@ -131,7 +131,7 @@ var mailOptions = {
   to: usu.to,
   subject: 'BIENVENIDO A PREVENIR EXPRESS - ACTIVACION CUENTA',
   text: usu.texto,
-  html: '<img src="http://cdn.prevenirexpress.com:3000/avatars/banner1a.png" alt="cambio" width="70%" height="70%">'+
+  html: '<img src="http://cdn.prevenirexpress.com:3000/avatars/imagenCorreo.png" alt="cambio" width="100%">'+
 
   '</br></br><h3>BIENVENIDO A PREVENIR EXPRESS</h3></br><div>Gracias por ser parte de nuesta familia '+
           'en donde encontraras los mejores decuentos medicos de tu ciudad, por DESCARGA nuestra aplicacion desde la play store de android o ios e ingresa por recuperar contraseña, despues de seguir los pasos favor ingresa este codigo en la aplicacion: <h2>'+ usu.pss + '</h2></div>'};
