@@ -369,7 +369,7 @@ histClinModule.darHistClinIdU = (ids, callback) => {
   if(connection)
   {
     console.log(ids);
-    let sql = "SELECT historia_clinica.*,CONVERT_TZ(historia_clinica.createdAd,'+00:00','-05:00') as createdAd FROM historia_clinica WHERE usuarios_id = ? AND id_servicios = ?";
+    let sql = "SELECT historia_clinica.*,CONVERT_TZ(historia_clinica.createdAd,'+00:00','-05:00') as createdAd FROM historia_clinica WHERE usuarios_id = ? AND id_servicios = ? ORDER BY historia_clinica.createdAd desc;";
     connection.query(sql,[ids.idu, ids.idser],(err,rhcl)=>{
         if(err){throw err}
         else
@@ -422,7 +422,7 @@ histClinModule.darHistClinCedSer = (ids, callback) => {
   {
     console.log('historia por cedula y por idservicio');
     console.log(ids);
-    let sql = "SELECT historia_clinica.*,CONVERT_TZ(historia_clinica.createdAd,'+00:00','-05:00') as createdAd FROM historia_clinica, usuarios WHERE historia_clinica.usuarios_id = usuarios.id AND usuarios.cedula = ? AND id_servicios = ?;";
+    let sql = "SELECT historia_clinica.*,CONVERT_TZ(historia_clinica.createdAd,'+00:00','-05:00') as createdAdm FROM historia_clinica, usuarios WHERE historia_clinica.usuarios_id = usuarios.id AND usuarios.cedula = ? AND id_servicios = ? ORDER BY historia_clinica.createdAd desc;";
     connection.query(sql,[ids.ced, ids.ser],(err,rhcl)=>{
         if(err){throw err}
         else
@@ -463,7 +463,7 @@ histClinModule.darHistoriaClinicaFin = (idc,callback) =>
                     // console.log('denrtro del if');
                     // console.log(res1.id_antecedentesf);
                     connection.query(sqlaf,[res1.id_antecedentesf],(err,resaf)=>{
-                      res1.antecedentef = resaf[0];
+                      res1.antecedentef = resaf;
                       return (err) ? reject(err) :  resolve(res1);
                     })
                   }
@@ -480,7 +480,7 @@ histClinModule.darHistoriaClinicaFin = (idc,callback) =>
                         {
                           connection.query(sqlap,[res2.id_antecedentesp],(err,resap)=>{
                             // console.log(resap);
-                            res2.antecedentesp = resap[0];
+                            res2.antecedentesp = resap;
                             return (err) ? reject(err) : resolve(res2);
                           })
                         }
@@ -515,7 +515,7 @@ histClinModule.darHistoriaClinicaFin = (idc,callback) =>
                                             {
                                               let sqlhyf = 'SELECT * FROM habitosyfactores WHERE id_habitosyfactores = ?;';
                                               connection.query(sqlhyf,[res4.id_habitosyfactores],(err,reshf)=>{
-                                                res4.habitosyfactores = reshf[0];
+                                                res4.habitosyfactores = reshf;
                                                 return (err) ? reject(err): resolve(res4);
                                               })
                                             }
@@ -534,7 +534,7 @@ histClinModule.darHistoriaClinicaFin = (idc,callback) =>
                                           let sqlrs = 'SELECT * FROM revisionpsistemas WHERE id_revisionpsistemas = ?;';
                                           connection.query(sqlrs,[res5.id_revisionpsistemas],(err,resrs)=>{
                                             // console.log(resrs);
-                                            res5.revisionps = resrs[0];
+                                            res5.revisionps = resrs;
                                             return (err)? reject(err): resolve(res5)
                                           })
                                           }
@@ -550,7 +550,7 @@ histClinModule.darHistoriaClinicaFin = (idc,callback) =>
                                           {
                                               let sqlef = 'SELECT * FROM examenf WHERE id_examenf = ?;';
                                               connection.query(sqlef,[res6.id_examenf],(err,respef)=>{
-                                                res5.examenf = respef[0];
+                                                res5.examenf = respef;
                                                 return (err)? reject(err): resolve(res6);
                                               })
                                             }
