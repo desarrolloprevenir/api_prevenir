@@ -20,7 +20,7 @@ app.get('/impdiagnostica',(req,res)=>{
 
 app.post('/histclinica',(req,res)=>{
   let historia = req.body;
-  // console.log(req.body);
+  console.log(req.body);
   // console.log(hitsoria);
   histc.nuevaHistoria(req.body,(err,resp)=>{
     res.json(resp);
@@ -62,6 +62,11 @@ app.get('/darhistcf/:idhc',(req,res)=>{
 
 });
 
+app.get('/medicamentos',(req,res)=>{
+  histc.darMedicamentos((err,medres)=>{
+      res.json(medres);
+  });
+})
 
 
 }
