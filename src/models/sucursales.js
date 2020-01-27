@@ -216,6 +216,60 @@ sucurModule.sucurIdMember = (idm,callback)=>
 
 };
 
+sucurModule.cambioLogin = (sucur,callback)=>{
+  if(connection)
+  {
+    console.log(sucur);
+    let selsql = 'SELECT members.password, provedores.id_provedor FROM members,provedores WHERE members.id = provedores.members_id AND members.email = ?;';
+    let selsuc = 'SELECT sucursales.members_id from sucursales WHERE sucursales.id_sucursales = ? AND sucursales.id_provedor = ?;';
+    let uptsuc = 'UPDATE members SET email = ?, password = ? WHERE (id = ?);'
+    connection.query(selsql,[sucur.email],(err,resp)=>{
+      if(err){throw err}
+      else
+      {
+        if(JSON.stringify(resp)!='[]')
+        {
+        // console.log(resp[0].password);
+        // console.log(sucur.passadmin);
+        if(resp[0].password == sucur.passadmin)
+        {
+          console.log(resp);
+          connection.query(selsuc,[sucur.id_sucur,resp[0].id_provedor],(err,resuc)=>{
+            if(err){throw err}
+            else
+            {
+              console.log('RESPUESTA DE SUCURSAL');
+              console.log(resuc);
+              connection.query(uptsuc,[sucur.usu,sucur.passnu,resuc[0].members_id],(err,respup)=>{
+                if(err){throw err}
+                else {
+                  console.log(respup);
+                  if(respup.affectedRows >= 1)
+                  {
+                    callback(202,{"mensaje":"usuario y contraseña cambiados con exito","resp":true})
+                  }
+                  else
+                  {
+                    callback(404,{"mensaje":"algo salio mal por favor intenta de nuevo","resp":false})
+                  }
+                }
+              })
+            }
+          })
+        }
+        else {
+          callback(404,{"mensaje":"correo o contrsaña incorrecta","resp":false})
+        }
+          }
+          else {
+            callback(404,{"mensaje":"correo o contrsaña incorrecta","resp":false})
+          }
+      }
+    })
+  }
+
+};
+
 
 
 

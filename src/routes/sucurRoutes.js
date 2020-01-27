@@ -72,5 +72,11 @@ module.exports = function (app)
         });
   });
 
+  app.put('/contrasuc',(req,res)=>{
+    sucur.cambioLogin(req.body,(err,respc)=>{
+      res.json(respc);
+    })
+  })
+
 
 }

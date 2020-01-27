@@ -168,7 +168,7 @@ consulModule.buscarConsulSuc = (ids, callback) =>
 if(connection)
 {
   var sql = "SELECT consultorio.*, CONCAT(medicos.nombres ,' ', medicos.apellidos) as medico, servicios.nombre as servicio FROM consultorio, medicos, servicios WHERE consultorio.medico_id = medicos.medico_id AND consultorio.id_servicios = servicios.id_servicios AND  id_sucursales = ? AND consultorio.eliminado = 0;"
-  var suc = 'SELECT sucursales.*, municipio.nombre as municipio FROM sucursales, municipio WHERE sucursales.id_municipio = municipio.id_municipio AND id_sucursales = ?;'
+  var suc = 'SELECT sucursales.*, municipio.nombre as municipio, members.email FROM sucursales, municipio, members WHERE sucursales.members_id = members.id AND sucursales.id_municipio = municipio.id_municipio AND id_sucursales = ?;'
   connection.query(suc,[ids],(err,res)=>{
     if(err){throw err}
     else
