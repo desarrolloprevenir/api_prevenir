@@ -319,7 +319,7 @@ histClinModule.darHistoriaClinicaFin = (idc,callback) =>
                     // console.log('denrtro del if');
                     // console.log(res1.id_antecedentesf);
                     connection.query(sqlaf,[res1.id_antecedentesf],(err,resaf)=>{
-                      res1.antecedentef = resaf;
+                      res1.antecedentef = resaf[0];
                       return (err) ? reject(err) :  resolve(res1);
                     })
                   }
@@ -336,7 +336,7 @@ histClinModule.darHistoriaClinicaFin = (idc,callback) =>
                         {
                           connection.query(sqlap,[res2.id_antecedentesp],(err,resap)=>{
                             // console.log(resap);
-                            res2.antecedentesp = resap;
+                            res2.antecedentesp = resap[0];
                             return (err) ? reject(err) : resolve(res2);
                           })
                         }
@@ -371,7 +371,7 @@ histClinModule.darHistoriaClinicaFin = (idc,callback) =>
                                             {
                                               let sqlhyf = 'SELECT * FROM habitosyfactores WHERE id_habitosyfactores = ?;';
                                               connection.query(sqlhyf,[res4.id_habitosyfactores],(err,reshf)=>{
-                                                res4.habitosyfactores = reshf;
+                                                res4.habitosyfactores = reshf[0];
                                                 return (err) ? reject(err): resolve(res4);
                                               })
                                             }
@@ -390,7 +390,7 @@ histClinModule.darHistoriaClinicaFin = (idc,callback) =>
                                           let sqlrs = 'SELECT * FROM revisionpsistemas WHERE id_revisionpsistemas = ?;';
                                           connection.query(sqlrs,[res5.id_revisionpsistemas],(err,resrs)=>{
                                             // console.log(resrs);
-                                            res5.revisionps = resrs;
+                                            res5.revisionps = resrs[0];
                                             return (err)? reject(err): resolve(res5)
                                           })
                                           }
@@ -406,7 +406,7 @@ histClinModule.darHistoriaClinicaFin = (idc,callback) =>
                                           {
                                               let sqlef = 'SELECT * FROM examenf WHERE id_examenf = ?;';
                                               connection.query(sqlef,[res6.id_examenf],(err,respef)=>{
-                                                res5.examenf = respef;
+                                                res5.examenf = respef[0];
                                                 return (err)? reject(err): resolve(res6);
                                               })
                                             }

@@ -3,6 +3,7 @@ const jwts = require('../models/jwt');
 const citas = require('../models/citas');
 const eject = require('../models/ejecucion');
 const moment = require('moment');
+const jwt = require('../models/jwt');
 
 
 module.exports = function (app) {
@@ -93,5 +94,14 @@ app.get('/vemail/:email',(req,res)=>{
        res.json(resp);
     });
 });
+
+app.put('/upcontra',jwt.valida,(req,res)=>{
+  let user = req.body;
+  console.log(user);
+  User.cambioContraseña(user,(err,resp)=>{
+    res.json(resp);
+  });
+
+})
 
 }

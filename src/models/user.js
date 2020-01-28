@@ -241,4 +241,47 @@ userModel.darUsuario=(ced,callback)=>{
         };
   };
 
+  userModel.cambioContraseña = (user, callback)=>{
+    if(connection)
+    {
+      console.log(user);
+      let sqlsel = 'SELECT members.id FROM members WHERE members.password = ? AND members.email = ?;';
+      let sqlupt = 'UPDATE members SET password = ? WHERE id = ?;'
+      connection.query(sqlsel,[user.passwv,user.email],(err,rid)=>{
+        if(err){throw err}
+        else
+        {
+
+          if(JSON.stringify(rid)!='[]')
+          {
+            rid = rid[0];
+            console.log(rid);
+            connection.query(sqlupt,[user.passwn,rid.id],(err,resp)=>{
+              if(err){throw err}
+              else{
+                console.log();
+                console.log(resp);
+                if(resp.affectedRows>=1)
+                {
+                  callback(null,true)
+                }
+                else {
+                  callback(null,'UUUPS!! Algo salio mal intenta de nuevo')
+                }
+              }
+            });
+            console.log(rid);
+          }
+          else
+          {
+            console.log('Error en el usuario o contraseña incorrecta');
+            callback(null,'error usuario o contraseña');
+          }
+
+        }
+      })
+
+    }
+  };
+
 module.exports = userModel;
