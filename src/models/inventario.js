@@ -10,14 +10,16 @@ database: config.nombredb
 
 let invModule = {};
 
+//categorias inventvario
 invModule.agregarCatei = (cate,callback)=>{
   console.log(cate);
-  let sqlin = 'INSERT INTO `prevenirexpres`.`categoria_inv` (`nombre`, `descripcion`) VALUES (?, ?);';
+  let sqlin = 'INSERT INTO categoria_inv (nombre, descripcion) VALUES (?, ?);';
   connection.query(sqlin,[cate.nombre,cate.descripcion],(err,respin)=>{
     if(err){throw err}
-    else
+    else {
+    }
     {
-      let sqlsu = 'INSERT INTO `prevenirexpres`.`sucursales_has_categoria_inv` (`id_sucursales`, `id_cateogoriai`) VALUES (?, ?);';
+      let sqlsu = 'INSERT INTO sucursales_has_categoria_inv (id_sucursales, id_cateogoriai) VALUES (?, ?);';
       connection.query(sqlsu,[cate.id_sucursal,respin.insertId],(err,resp)=>{
         if(err){throw err}
         else
@@ -43,6 +45,36 @@ if(connection){
 }
 };
 
+invModule.modificarCateI = (cate,callback) =>{
+if(connection)
+{
+  let sqlmod = 'UPDATE categoria_inv SET nombre = ?, descripcion = ? WHERE id_cateogoriai = ?;';
+  connection.query(sqlmod,[cate.nombre,cate.desc,cate.id_cat],(err,resp)=>{
+    if(err){throw err}
+    else
+    {
+      callback(null,true);
+    }
+  });
+}
+};
+
+invModule.EliminarCateI = (id,callback) => {
+  if(connection)
+  {
+    let sqldel = 'DELETE FROM categoria_inv WHERE id_cateogoriai = ?;';
+    connection.query(sqldel,id,(err,resp)=>{
+      if(err){throw err}
+      else
+      {
+        callback(null,true);
+      }
+    });
+  }
+}
+
+
+//INVENTARIO
 invModule.darinventario = (ids,callback)=>{
   if(connection)
   {

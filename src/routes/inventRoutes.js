@@ -6,7 +6,9 @@ module.exports = function (app)
 //agrega categorias al inventarios
 app.post('/cinventario',(req,res)=>{
   let cate = req.body;
-
+inv.agregarCatei(cate,(err,resp)=>{
+  res.json(resp);
+})
 })
 //retorna las categorias de los inventarios
 app.get('/cinventario/:idsuc',(req,res)=>{
@@ -19,7 +21,12 @@ app.get('/cinventario/:idsuc',(req,res)=>{
 //elimina categorias del inventario
 
 //modifica Categorias del inventario
-
+app.put('/cinventario',(req,res)=>{
+  let cate = req.body;
+  inv.modificarCateI(cate,(err,resp)=>{
+    res.json(resp)
+  });
+});
 //dar el inventario por cada sucursal y en caso de optica cate 3 dar material de monturas
 app.get('/inventario/:idsuc/:idcatei',(req,res)=>{
   ids ={ id_sucursal:req.params.idsuc,

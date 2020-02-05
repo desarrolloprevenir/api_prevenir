@@ -243,10 +243,12 @@ return res.status(305).send({'mensaje':'error al validar ususario'});
 
 jwtmodel.confirmaCuenta = (salt,callback)=>{
   let con = 'SELECT salt FROM members Where id = ? AND salt = ?;'
+  console.log(salt);
   connection.query(con,[salt.id,salt.salt],(err,res)=>{
     if(err){throw err}
     else
     {
+      console.log(res);
       if(JSON.stringify(res)!='[]')
       {
         let upt = 'UPDATE members SET locked = 1 WHERE (id =?);'

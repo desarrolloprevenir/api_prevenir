@@ -137,6 +137,7 @@ res.json([{'menaje':'no se pudo agregar el usuario ya existe','existe':true},dat
 //confirma la cuenta con el salt dado al correo
 app.put('/cuenta',jwts.valida,(req,res)=>{
   let salt = req.body;
+  console.log(req.body);
   jwts.confirmaCuenta(salt,(err,row)=>{
     res.json(row);
   });

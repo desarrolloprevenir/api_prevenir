@@ -158,8 +158,10 @@ histClinModule.nuevaHistoria = (hisc,callback) => {
                                 }
                               }).then(async(res61,rej61)=>{
                                     new Promise(function(resolve,reject){
-                                      if(JSON.stringify(hisc.medicamentos)!='[]' || hisc.medicamentos != undefined)
+                                      // console.log(JSON.stringify(hisc.medicamentos),' Prueba medicamentos');
+                                      if(JSON.stringify(hisc.medicamentos)!='[]')
                                       {
+                                        // console.log('dentro de medicamentos');
                                     //     let j = 0;
                                         let impd = hisc.medicamentos;
                                         // console.log(impd);
@@ -175,7 +177,7 @@ histClinModule.nuevaHistoria = (hisc,callback) => {
                                         // return resolve(hisc);
                                       }
                                       else {
-                                        // console.log(ids);
+                                        console.log('vacio');
                                         ids.id_medicamentos = null;
                                         return resolve(hisc);
                                       }
