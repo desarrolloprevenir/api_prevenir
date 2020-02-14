@@ -295,7 +295,7 @@ if(err){throw err}
             console.log(rmed);
             if(rmed.tokenpsh!='not' || rmed == undefined || rmed == 'undefined')
             {
-                  players.push(rmed.rmed)
+                  players.push(rmed.tokenpsh)
                   console.log('PLAYERS MEDICOS');
                   console.log(players);
             }
