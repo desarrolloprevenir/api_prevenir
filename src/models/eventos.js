@@ -256,7 +256,7 @@ if(err){throw err}
       masc:events.mascota};
     // eject.correCita(corr,(err,resps)=>{
     var psh = 'SELECT members.tokenpsh, members.email, servicios.nombre FROM members,provedores,servicios WHERE provedores.members_id = members.id AND servicios.id_provedores = provedores.id_provedor AND servicios.id_servicios = ?;';
-    var med = 'SELECT members.tokenpsh FROM members, medicos, consultorio, provedores_has_medicos, servicios WHERE members.id = medicos.members_id AND provedores_has_medicos.medico_id = medicos.medico_id AND servicios.id_servicios = consultorio.id_servicios AND provedores_has_medicos.id_consultorio = ? GROUP BY members.tokenpsh ;';
+    var med = 'SELECT members.tokenpsh FROM consultorio, medicos, members WHERE medicos.medico_id = consultorio.medico_id AND medicos.members_id = members.id AND consultorio.id_consultorio = ?;';
       // console.log('mascota');
     if(events.mascota==true)
     {
@@ -284,7 +284,7 @@ if(err){throw err}
               console.log('PLAYERS PROVEDOR');
               console.log(players);
         }
-            // console.log(players);
+            console.log(events.consultorio);
         connection.query(med,[events.consultorio],(err,rmed)=>{
           if(err){throw err}
           else

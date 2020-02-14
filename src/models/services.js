@@ -11,6 +11,7 @@ var hora = require('./horario');
 var fotoss = require('./fotos');
 var eject = require('./ejecucion');
 var async = require("async");
+var catei = require("./inventario")
 
 connection = mysql.createConnection({
 host: config.domain,
@@ -47,10 +48,19 @@ servmodule.save = (data , callback ) => {
     // console.log('AGREGADO EL SERVICIO');
     var idinsert = res.insertId;
     idInd = res.insertId;
-    //obteniendo el horario
-    // horarios = horario[0];
-    // horarios = horarios.horario;
+          console.log(data.categoria);
+          if(data.categoria==3)
+          {
+            cate = {
+	                 "nombre":"material lentes",
+	                 "descripcion":"descripcion categoria",
+	                 "id_provedor":data.id_prov,
+	                 "sucursales":'[]'
+                 };
 
+            catei.agregarCatei(cate,resp);
+            console.log(resp);
+          }
           sqlss = 'INSERT INTO servicios_categoria (servicios_idservicios, categoria_idcategoria) VALUES (?, ?)';
           // console.log('id_Servicio'+idInd+'/*/*/*'+'Id Cate'+data.categoria);
           connection.query(sqlss,[idInd,data.categoria],(err,row)=>{

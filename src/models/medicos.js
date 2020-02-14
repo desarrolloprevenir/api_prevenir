@@ -85,18 +85,33 @@ if(connection)
 medicosModule.getMedicoMem = (id,callback)=>{
   if(connection)
   {
+    console.log(id);
     let resp = [];
-      let get = 'SELECT medicos.*,members.email FROM medicos,members WHERE medicos.members_id = members.id AND medicos.members_id = ?;';
+      let get = 'SELECT medicos.*,municipio.nombre as municipio,departamento.id_departamento as departamentoId, departamento.nombre as departamento, members.email FROM medicos,members, municipio, departamento WHERE municipio.id_departamento = departamento.id_departamento AND medicos.ciudad_origen = municipio.id_municipio AND medicos.members_id = members.id AND medicos.members_id = ?;';
       connection.query(get,[id],(err,res)=>{
         if(err){throw err}
         else
         {
+          console.log('respuesta medicos');
+          console.log(res);
           titulo.getTitulos(id,(err,row)=>{
+            console.log(row);
+            if (JSON.stringify(row)!='[]')
+            {
+              console.log('dentro');
             res = res[0];
             res.titulos = row;
             resp.push(res);
-            // console.log(resp);
+            console.log(resp);
             callback(null,resp)
+            }
+            else {
+              console.log('fuera');
+              res.titulos = '[]';
+              console.log(res);
+              callback(null,res)
+            }
+
           });
 
         }
@@ -258,22 +273,22 @@ if(connection)
 medicosModule.setMedico = (medico,callback) =>{
   if(connection)
   {
-    // console.log(medico);
+    console.log(medico);
     let titulos = medico.estudios;
     // console.log(titulos);
-    let upd = 'UPDATE medicos SET nombres = ?, apellidos = ?, titulo = ?, telefono = ?, whatsapp = ? WHERE (medico_id = ?);';
-    connection.query(upd,[medico.nombres,medico.apellidos,medico.titulo,medico.telefono,medico.wp,medico.id],(err,rep)=>{
+    let upd = 'UPDATE medicos SET nombres = ?, apellidos = ?, titulo = ?, telefono = ?, whatsapp = ?, ciudad_origen = ?,fecha_nacimiento = ?, genero = ? WHERE (medico_id = ?);';
+    connection.query(upd,[medico.nombres,medico.apellidos,medico.titulo,medico.telefono,medico.wp,medico.ciudad_o,medico.fecha_n,medico.genero,medico.id],(err,rep)=>{
       if(err){throw err}
       else
       {
 
-        if (JSON.stringify(titulos)=='[]')
+        if (JSON.stringify(medico.estudios)=='[]')
         {
         callback(null,true);
         }
         else
         {
-          titulo.agregarTitulos(titulos,(err,resp)=>{
+          titulo.agregarTitulos(medico.estudios,(err,resp)=>{
             callback(null,resp);
           });
         }

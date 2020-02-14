@@ -121,7 +121,7 @@ consulModule.deleteConsultorio = (idc,callback)=>
   if(connection)
   {
     var selho = 'UPDATE consultorio SET eliminado = 1 WHERE id_consultorio = ?;'
-    var med = 'UPDATE provedores_has_medicos SET activo = "false" WHERE id_consultorio = ? ;'
+    var med = 'UPDATE provedores_has_medicos SET activo = "true" WHERE id_consultorio = ? ;'
     connection.query(selho,[idc],(err,idshor)=>{
           if(err){throw err}
           else
