@@ -186,7 +186,7 @@ sucurModule.sucurServMun = (ids, callback)=>
 {
   if(connection)
   {
-    var sql = 'SELECT sucursales.*, municipio.nombre as municipio FROM sucursales, provedores_has_medicos, consultorio, municipio WHERE sucursales.id_sucursales = provedores_has_medicos.id_sucursales AND provedores_has_medicos.id_consultorio = consultorio.id_consultorio AND sucursales.id_municipio = municipio.id_municipio AND consultorio.id_servicios = ? AND provedores_has_medicos.id_provedor = ?  AND sucursales.id_municipio = ? AND sucursales.eliminar = 0;';
+    var sql = 'SELECT sucursales.*, municipio.nombre as municipio FROM sucursales, consultorio, municipio WHERE consultorio.id_servicios = ? AND sucursales.id_provedor = ? AND sucursales.id_municipio = ? AND sucursales.id_municipio = municipio.id_municipio GROUP BY id_sucursales;';
     connection.query(sql,[ids.id_ser,ids.id_prov,ids.id_muni],(err,su)=>{
       if(err){throw err}
       else
