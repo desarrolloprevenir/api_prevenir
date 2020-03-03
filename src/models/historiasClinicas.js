@@ -158,7 +158,7 @@ histClinModule.nuevaHistoria = (hisc,callback) => {
                                 }
                               }).then(async(res61,rej61)=>{
                                     new Promise(function(resolve,reject){
-                                      // console.log(JSON.stringify(hisc.medicamentos),' Prueba medicamentos');
+                                      console.log(JSON.stringify(hisc.medicamentos),' Prueba medicamentos');
                                       if(JSON.stringify(hisc.medicamentos)!='[]')
                                       {
                                         // console.log('dentro de medicamentos');
