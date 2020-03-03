@@ -51,6 +51,7 @@ servmodule.save = (data , callback ) => {
           console.log(data.categoria);
           if(data.categoria==3)
           {
+            console.log('Creando una Optica');
             cate = {
 	                 "nombre":"material lentes",
 	                 "descripcion":"descripcion categoria",
@@ -58,8 +59,13 @@ servmodule.save = (data , callback ) => {
 	                 "sucursales":'[]'
                  };
 
-            catei.agregarCatei(cate,resp);
-            console.log(resp);
+                 let sqlin = 'INSERT INTO categoria_inv (nombre, descripcion,id_provedor) VALUES (?, ?,?);';
+                 connection.query(sqlin,[cate.nombre,cate.descripcion,cate.id_provedor],(err,respin)=> {
+                   if(err){throw err}
+                   else {
+                     console.log('ok');
+                   }
+                 })
           }
           sqlss = 'INSERT INTO servicios_categoria (servicios_idservicios, categoria_idcategoria) VALUES (?, ?)';
           // console.log('id_Servicio'+idInd+'/*/*/*'+'Id Cate'+data.categoria);
