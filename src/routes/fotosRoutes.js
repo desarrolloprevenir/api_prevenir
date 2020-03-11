@@ -6,7 +6,8 @@ module.exports = function (app)
 
 //cambia la foto de los usuarios en la base de datos
 app.put('/fotou',jwts.valida,(req,res)=>{
-  //console.log('///////////////////////////************************')
+  console.log('///////////////////////////************************')
+  console.log('ENTRADA FOTO U');
   //console.log(req.body);
 var foto = {
 fotos:req.body.foto,
@@ -14,21 +15,24 @@ id:req.body.id
 };
 var admin = req.body.admin;
 var med = req.body.medico;
-// console.log('admin '+admin+' medico '+med);
-if(admin==false && med==false)
+console.log('admin '+admin+' medico '+med);
+if((admin==undefined && med==undefined) || (admin==false && med==false) )
 {
+  console.log('ADENTRO usuario');
 fotos.setFotoUsu(foto,(err,data)=>{
 res.json(data);
 });
 }
 else if (admin==false && med==true)
 {
+    console.log('ADENTRO medico');
   fotos.setFotoMed(foto,(err,data)=>{
     res.json(data);
   });
 }
 else if (admin==true && med==false )
 {
+    console.log('ADENTRO ADMIN');
   fotos.setFotoProv(foto,(err,data)=>{
   res.json(data);
   });
