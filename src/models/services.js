@@ -53,7 +53,7 @@ servmodule.save = (data , callback ) => {
           {
             console.log('Creando una Optica');
             cate = {
-	                 "nombre":"material lentes",
+	                 "nombre":"Material Lentes",
 	                 "descripcion":"descripcion categoria",
 	                 "id_provedor":data.id_prov,
 	                 "sucursales":'[]'
@@ -301,6 +301,8 @@ callback(null,resp);
 }
 
 };
+
+   
 // da servicios por el id de del servicio
 servmodule.darServiciosIdS = (id,callback)=>{
  // console.log('prueba de servicios')

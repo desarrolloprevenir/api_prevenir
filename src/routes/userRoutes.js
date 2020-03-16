@@ -4,6 +4,7 @@ const citas = require('../models/citas');
 const eject = require('../models/ejecucion');
 const moment = require('moment');
 const jwt = require('../models/jwt');
+const sms = require('../models/sms')
 
 
 module.exports = function (app) {
@@ -73,7 +74,8 @@ res.json(resp);
 });
 
 app.get('/prueba',(err,res)=>{
-eject.pruebas((err,resp)=>{
+  let data = 'prueba';
+sms.sendSms(data,(err,resp)=>{
 res.json(resp);
 });
 });

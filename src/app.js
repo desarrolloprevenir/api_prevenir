@@ -154,6 +154,7 @@ require('./routes/opticaRoutes')(app);
 require('./routes/sucurRoutes')(app);
 require('./routes/consultRoutes')(app);
 require('./routes/historiascRoutes')(app);
+require('./routes/smsRoutes')(app);
 // require('./route/pruebasRoutes')(app);
 
 // require('./routes/eventsMascRoutes')(apps);

@@ -5,6 +5,7 @@ let vals = require('./valida');
 let user = require('./user');
 let ciclo = require('../controler/ciclos')
 let email = require('./email');
+let sms = require('./sms');
 
 connection = mysql.createConnection({
 host: config.host,
@@ -154,7 +155,11 @@ var usu = {
   pss: cod,
   id:row.insertId
 };
+let data = {nums:'57'+register.tel,
+            sms:'Gracias por inscribirte a Descuentos Medicos Prevenir Express tu codigo de verificacion para ingresar a nuestra app es '+cod }
 
+sms.sendSms(data,(err,rsms)=>{
+console.log(rsms);
 email.cuentaBlock (usu,(err,ressp)=>{
   // console.log(ressp);
   if(ressp==true)
@@ -165,7 +170,7 @@ email.cuentaBlock (usu,(err,ressp)=>{
       callback(null,valido);
     }
 });
-
+});
 
 }
 });

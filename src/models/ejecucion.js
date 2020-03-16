@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const sms = require('./sms');
 let config = require('../config');
 let moment = require('moment');
 let pushs = require('./push');
@@ -7,6 +8,7 @@ var sleep = require('system-sleep');
 let ciclo = require('../controler/ciclos')
 let email = require('./email');
 var forEach = require('async-foreach').forEach;
+
 
 connection = mysql.createConnection({
 host: config.host,
@@ -357,7 +359,7 @@ ejectModel.cambioSalt = (id,callback)=>{
 ejectModel.cambioContra = (id,callback)=>{
   if(connection)
   {
-    var sel = 'SELECT * FROM members WHERE email = ? ;';
+    var sel = 'SELECT members.*, usuarios.telefono FROM members, usuarios WHERE members.id = usuarios.members_id  AND email = ? ;';
     var upd = 'UPDATE members SET salt_contra = ? WHERE (id = ?);';
     connection.query(sel,[id],(err,res)=>{
       if(err){throw err}
@@ -378,6 +380,12 @@ ejectModel.cambioContra = (id,callback)=>{
         pss: cod,
         id:res.id
       };
+      let data = {
+        nums:'57'+res.telefono,
+        sms:'su codigo para cambiar de contraseña es '+cod
+      }
+      sms.sendSms(data,(err,smsr)=>{
+        console.log(smsr);
       email.cuentaBlock (usu,(err,ressp)=>{
         connection.query(upd,[cod,res.id],(err,resp)=>{
           if(err){throw err}
@@ -387,6 +395,7 @@ ejectModel.cambioContra = (id,callback)=>{
           }
         });
       });
+    });
       }
       }
     });
