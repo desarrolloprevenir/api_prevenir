@@ -155,7 +155,7 @@ var usu = {
   pss: cod,
   id:row.insertId
 };
-let data = {nums:'57'+register.tel,
+let data = {nums: '57'+register.tel,
             sms:'Gracias por inscribirte a Descuentos Medicos Prevenir Express tu codigo de verificacion para ingresar a nuestra app es '+cod }
 
 sms.sendSms(data,(err,rsms)=>{
