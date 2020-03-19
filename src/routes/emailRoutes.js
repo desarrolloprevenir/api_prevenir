@@ -53,4 +53,13 @@ app.post('/emails',(req,res)=>{
     res.json(data);
   });
 });
+
+app.get('/premail',(req,res)=>{
+// console.log(conf);
+email.prueba1((err,data)=>{
+  res.json(data);
+});
+});
+
+
 }

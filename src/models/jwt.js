@@ -155,14 +155,17 @@ var usu = {
   pss: cod,
   id:row.insertId
 };
+console.log('numero de telefono');
+console.log(register.tel);
 let data = {nums: '57'+register.tel,
             sms:'Gracias por inscribirte a Descuentos Medicos Prevenir Express tu codigo de verificacion para ingresar a nuestra app es '+cod }
 
 sms.sendSms(data,(err,rsms)=>{
 console.log(rsms);
 email.cuentaBlock (usu,(err,ressp)=>{
-  // console.log(ressp);
-  if(ressp==true)
+  console.log(ressp);
+  if(err){throw err}
+    else if(ressp==true)
       {
         // console.log(row.insertId);
       let valido = {mensaje:'Usuario registrado con exito',existe:'false',ids:row.insertId};

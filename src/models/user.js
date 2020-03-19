@@ -81,7 +81,8 @@ var nombre = usu.nombre;
 var apellido = usu.apellido;
 var avatars =  usu.avatar;
 
-// console.log(avatars);
+console.log('id del usuario');
+console.log(id);
 var sql = 'INSERT INTO usuarios(id,cedula,correo,avatar,nombre,apellidos,members_id,parentescos_id_parentescos,id_pais) VALUES (?,?,?,?,?,?,?,?,?)';
 connection.query(sql,[id,cedula,correo,avatars,nombre,apellido,id,usu.parent,47],(err, row)=>{
 if(err)

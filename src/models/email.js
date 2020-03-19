@@ -21,26 +21,24 @@ emailModel.sendMail = (mail,callback)=>{
 
 
 
-var  transporter = nodemailer.createTransport(smtpTransport({
+  var transporter = nodemailer.createTransport({
     service: 'gmail',
     host: "smtp.gmail.com",
     port: 465,
     secure: true,
-    auth: {
-            xoauth2: xoauth2.createXOAuth2Generator({
-              // user:'contactoprevenir@gmail.com',
-              // clientId:'669854799910-42brst8bu1gpn3eh49n5efrd88cn2sg2.apps.googleusercontent.com',
-              // clientSeret:'DGVpQslRBho94BcwiTcdzmJp',
-              // refreshToken:'1/5SsC1sH4qOr4jDwn9bda19nXrQX3zkRSomdDZ1DY1R0'
-              type: 'OAuth2',
-              user: 'contactoprevenir@gmail.com',
-              clientId: '669854799910-42brst8bu1gpn3eh49n5efrd88cn2sg2.apps.googleusercontent.com',
-              clientSecret: 'DGVpQslRBho94BcwiTcdzmJp',
-              refreshToken: '1/5SsC1sH4qOr4jDwn9bda19nXrQX3zkRSomdDZ1DY1R0',
-              accessToken: 'ya29.Gls-BrbFCF8zI7Rb1LbYJFWNl9JsPRAYdoZTcFe_nXd-XDmmyHlC9YKsWSwSt0Y7VCqcwTNWbtnMEflHjv-JQkhngdMa-iyZQjo_7JhXARYKdvCexkamvfeHn8V2'
-            })
-          }
-          }));
+    auth:{
+      // xoauth2: xoauth2.createXOAuth2Generator({
+        type: 'OAuth2',
+        user: config.user,
+        clientId: config.clientId,
+        clientSecret: config.clientSecret,
+        refreshToken: config.refreshToken,
+        accessToken: config.accessToken
+      // })
+
+    }
+
+  });
 //console.lo.log(mail);
 
   var mailOptions = {
@@ -64,22 +62,24 @@ var  transporter = nodemailer.createTransport(smtpTransport({
 };
 
 emailModel.cuentaBlock = (usu,callback) =>{
-  var  transporter = nodemailer.createTransport(smtpTransport({
-      service: 'gmail',
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true,
-      auth: {
-              xoauth2: xoauth2.createXOAuth2Generator({
-                type: 'OAuth2',
-                user: 'contactoprevenir@gmail.com',
-                clientId: '669854799910-42brst8bu1gpn3eh49n5efrd88cn2sg2.apps.googleusercontent.com',
-                clientSecret: 'DGVpQslRBho94BcwiTcdzmJp',
-                refreshToken: '1/5SsC1sH4qOr4jDwn9bda19nXrQX3zkRSomdDZ1DY1R0',
-                accessToken: 'ya29.Gls-BrbFCF8zI7Rb1LbYJFWNl9JsPRAYdoZTcFe_nXd-XDmmyHlC9YKsWSwSt0Y7VCqcwTNWbtnMEflHjv-JQkhngdMa-iyZQjo_7JhXARYKdvCexkamvfeHn8V2'
-              })
-            }
-            }));
+  console.log('Si estamos aui');
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth:{
+      // xoauth2: xoauth2.createXOAuth2Generator({
+        type: 'OAuth2',
+        user: config.user,
+        clientId: config.clientId,
+        clientSecret: config.clientSecret,
+        refreshToken: config.refreshToken,
+        accessToken: config.accessToken
+      // })
+
+    }
+  });
 
 var mailOptions = {
 
@@ -95,11 +95,11 @@ var mailOptions = {
 console.log(mailOptions);
 transporter.sendMail(mailOptions, function(error, info){
     if (error){
-        //console.lo.log(error);
-        callback(null,false);
-      //callback(null,'not send');
+      console.log('no se envio');
+        console.log(error);
+        callback(null,true);
     } else {
-        //console.lo.log("Email sent");
+        console.log("Email sent");
         callback(null,true);
     }
 });
@@ -108,25 +108,24 @@ transporter.sendMail(mailOptions, function(error, info){
 };
 
 emailModel.BienvenidoBlock = (usu,callback) =>{
-  var  transporter = nodemailer.createTransport(smtpTransport({
-      service: 'gmail',
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true,
-      auth: {
-              xoauth2: xoauth2.createXOAuth2Generator({
-                type: 'OAuth2',
-                user: 'contactoprevenir@gmail.com',
-                clientId: '669854799910-42brst8bu1gpn3eh49n5efrd88cn2sg2.apps.googleusercontent.com',
-                clientSecret: 'DGVpQslRBho94BcwiTcdzmJp',
-                refreshToken: '1/5SsC1sH4qOr4jDwn9bda19nXrQX3zkRSomdDZ1DY1R0',
-                accessToken: 'ya29.Gls-BrbFCF8zI7Rb1LbYJFWNl9JsPRAYdoZTcFe_nXd-XDmmyHlC9YKsWSwSt0Y7VCqcwTNWbtnMEflHjv-JQkhngdMa-iyZQjo_7JhXARYKdvCexkamvfeHn8V2'
-              })
-            }
-            }));
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth:{
+      // xoauth2: xoauth2.createXOAuth2Generator({
+        type: 'OAuth2',
+        user: config.user,
+        clientId: config.clientId,
+        clientSecret: config.clientSecret,
+        refreshToken: config.refreshToken,
+        accessToken: config.accessToken
+      // })
 
+    }
+  });
 var mailOptions = {
-
   from: 'PREVENIR EXPRESS', //config.from,
   to: usu.to,
   subject: 'BIENVENIDO A PREVENIR EXPRESS - ACTIVACION CUENTA',
@@ -217,26 +216,23 @@ emailModel.sendMailCita = (mail,callback)=>{
 
 // console.log('///**/*/*/*/*/*/*/*/* enviando correro');
 
-var  transporter = nodemailer.createTransport(smtpTransport({
-    service: 'gmail',
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    auth: {
-            xoauth2: xoauth2.createXOAuth2Generator({
-              // user:'contactoprevenir@gmail.com',
-              // clientId:'669854799910-42brst8bu1gpn3eh49n5efrd88cn2sg2.apps.googleusercontent.com',
-              // clientSeret:'DGVpQslRBho94BcwiTcdzmJp',
-              // refreshToken:'1/5SsC1sH4qOr4jDwn9bda19nXrQX3zkRSomdDZ1DY1R0'
-              type: 'OAuth2',
-              user: 'contactoprevenir@gmail.com',
-              clientId: '669854799910-42brst8bu1gpn3eh49n5efrd88cn2sg2.apps.googleusercontent.com',
-              clientSecret: 'DGVpQslRBho94BcwiTcdzmJp',
-              refreshToken: '1/5SsC1sH4qOr4jDwn9bda19nXrQX3zkRSomdDZ1DY1R0',
-              accessToken: 'ya29.Gls-BrbFCF8zI7Rb1LbYJFWNl9JsPRAYdoZTcFe_nXd-XDmmyHlC9YKsWSwSt0Y7VCqcwTNWbtnMEflHjv-JQkhngdMa-iyZQjo_7JhXARYKdvCexkamvfeHn8V2'
-            })
-          }
-          }));
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth:{
+    // xoauth2: xoauth2.createXOAuth2Generator({
+      type: 'OAuth2',
+      user: config.user,
+      clientId: config.clientId,
+      clientSecret: config.clientSecret,
+      refreshToken: config.refreshToken,
+      accessToken: config.accessToken
+    // })
+
+  }
+});
 //console.lo.log(mail);
 let mailOptions = mail;
 
@@ -279,26 +275,23 @@ emailModel.emailCitaPr = (mail,callback) =>{
               'Señor@(es): '+prov+
               '<br/><div> Se a registrado una nueva cita, para el '+fecha+' a las '+hora+' en nuestra aplicacion, por favor revisa tus citas en nuesta app'};
 
-              var  transporter = nodemailer.createTransport(smtpTransport({
-                  service: 'gmail',
-                  host: "smtp.gmail.com",
-                  port: 465,
-                  secure: true,
-                  auth: {
-                          xoauth2: xoauth2.createXOAuth2Generator({
-                            // user:'contactoprevenir@gmail.com',
-                            // clientId:'669854799910-42brst8bu1gpn3eh49n5efrd88cn2sg2.apps.googleusercontent.com',
-                            // clientSeret:'DGVpQslRBho94BcwiTcdzmJp',
-                            // refreshToken:'1/5SsC1sH4qOr4jDwn9bda19nXrQX3zkRSomdDZ1DY1R0'
-                            type: 'OAuth2',
-                            user: 'contactoprevenir@gmail.com',
-                            clientId: '669854799910-42brst8bu1gpn3eh49n5efrd88cn2sg2.apps.googleusercontent.com',
-                            clientSecret: 'DGVpQslRBho94BcwiTcdzmJp',
-                            refreshToken: '1/5SsC1sH4qOr4jDwn9bda19nXrQX3zkRSomdDZ1DY1R0',
-                            accessToken: 'ya29.Gls-BrbFCF8zI7Rb1LbYJFWNl9JsPRAYdoZTcFe_nXd-XDmmyHlC9YKsWSwSt0Y7VCqcwTNWbtnMEflHjv-JQkhngdMa-iyZQjo_7JhXARYKdvCexkamvfeHn8V2'
-                          })
-                        }
-                        }));
+              var transporter = nodemailer.createTransport({
+                service: 'gmail',
+                host: "smtp.gmail.com",
+                port: 465,
+                secure: true,
+                auth:{
+                  // xoauth2: xoauth2.createXOAuth2Generator({
+                    type: 'OAuth2',
+                    user: config.user,
+                    clientId: config.clientId,
+                    clientSecret: config.clientSecret,
+                    refreshToken: config.refreshToken,
+                    accessToken: config.accessToken
+                  // })
+
+                }
+              });
 
 
                         transporter.sendMail(mailOptions, function(error, info){
@@ -322,26 +315,23 @@ emailModel.senCorreos = (mails,callback) => {
   {
     console.log('/*/*/*/*/*/*/*/*/*/*');
     console.log(mails);
-    var  transporter = nodemailer.createTransport(smtpTransport({
-        service: 'gmail',
-        host: "smtp.gmail.com",
-        port: 465,
-        secure: true,
-        auth: {
-                xoauth2: xoauth2.createXOAuth2Generator({
-                  // user:'contactoprevenir@gmail.com',
-                  // clientId:'669854799910-42brst8bu1gpn3eh49n5efrd88cn2sg2.apps.googleusercontent.com',
-                  // clientSeret:'DGVpQslRBho94BcwiTcdzmJp',
-                  // refreshToken:'1/5SsC1sH4qOr4jDwn9bda19nXrQX3zkRSomdDZ1DY1R0'
-                  type: 'OAuth2',
-                  user: 'contactoprevenir@gmail.com',
-                  clientId: '669854799910-42brst8bu1gpn3eh49n5efrd88cn2sg2.apps.googleusercontent.com',
-                  clientSecret: 'DGVpQslRBho94BcwiTcdzmJp',
-                  refreshToken: '1/5SsC1sH4qOr4jDwn9bda19nXrQX3zkRSomdDZ1DY1R0',
-                  accessToken: 'ya29.Gls-BrbFCF8zI7Rb1LbYJFWNl9JsPRAYdoZTcFe_nXd-XDmmyHlC9YKsWSwSt0Y7VCqcwTNWbtnMEflHjv-JQkhngdMa-iyZQjo_7JhXARYKdvCexkamvfeHn8V2'
-                })
-              }
-              }));
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth:{
+        // xoauth2: xoauth2.createXOAuth2Generator({
+          type: 'OAuth2',
+          user: config.user,
+          clientId: config.clientId,
+          clientSecret: config.clientSecret,
+          refreshToken: config.refreshToken,
+          accessToken: config.accessToken
+        // })
+
+      }
+    });
 
     // console.log(mail);
     let send = [];
@@ -394,6 +384,42 @@ emailModel.senCorreos = (mails,callback) => {
 
 };
 
+emailModel.prueba1 = async(callback) =>{
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth:{
+    // xoauth2: xoauth2.createXOAuth2Generator({
+      type: 'OAuth2',
+      user: config.user,
+      clientId: config.clientId,
+      clientSecret: config.clientSecret,
+      refreshToken: config.refreshToken,
+      accessToken: config.accessToken
+    // })
+
+  }
+});
+
+var mailOptions = {
+  from:"contactoprevenir <contactoprevenir@gmail.com>",
+  to:"juankita8911@gmail.com",
+  subject:"prueba",
+  text:"hola mundo"
+}
+
+transporter.sendMail(mailOptions,(err,res)=>{
+  if(err){throw err}
+  else
+  {
+    console.log(res) ;
+    callback(null,true);
+  }
+})
+};
 
 
 
