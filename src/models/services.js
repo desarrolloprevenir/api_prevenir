@@ -91,7 +91,7 @@ servmodule.save = (data , callback ) => {
             var name = data.nombre +'_'+rand+data.duracion+'_'+idinsert+rand
             var fotos = foto.base64Image;
             var pathView = "/servicios/"+name;
-            var newPath = "src/public/servicios/"+name;
+            var newPath = "src/public/servicios/";
             pathView = pathView;
             ba64.writeImageSync(newPath, fotos);
             var fotoe = {
@@ -302,7 +302,7 @@ callback(null,resp);
 
 };
 
-   
+
 // da servicios por el id de del servicio
 servmodule.darServiciosIdS = (id,callback)=>{
  // console.log('prueba de servicios')
