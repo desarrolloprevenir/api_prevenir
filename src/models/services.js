@@ -25,7 +25,8 @@ let servmodule = {};
 // guardaba servicios pero no funciona
 servmodule.save = (data , callback ) => {
   // console.log('adentro del save nuevo vamo a ver');
-  console.log(data.medico_id);
+  // console.log(data.medico_id);
+  // console.log(data.id_prov);
   img = data.foto64;
   nombre = data.nombre;
   horario = data.horario;
@@ -35,8 +36,8 @@ servmodule.save = (data , callback ) => {
   var p=0;
   var mensaje = [];
   var cliente = data.precio*((100-data.descuento)/100);
-  var sql = 'INSERT INTO servicios(nombre,descripcion,duracion,max_citas_ves,video,precio,descuento,precio_cliente_prevenir,direccion,id_provedores,municipio_id_municipio,medico_id) values (?,?,?,?,?,?,?,?,?,?,?,?);';
-  connection.query(sql,[data.nombre,data.descripcion,data.duracion,data.max_citas,data.video,data.precio,data.descuento,cliente,data.direccion,data.id_prov,data.muni,data.medico_id],(err,res)=>{
+  var sql = 'INSERT INTO servicios(nombre,descripcion,duracion,max_citas_ves,video,precio,descuento,precio_cliente_prevenir,id_provedores,creadoPor) values (?,?,?,?,?,?,?,?,?,?);';
+  connection.query(sql,[data.nombre,data.descripcion,data.duracion,data.max_citas,data.video,data.precio,data.descuento,cliente,data.id_prov,data.creado],(err,res)=>{
   if(err)
   {
   throw err
@@ -44,29 +45,30 @@ servmodule.save = (data , callback ) => {
   else
   {
     // id de insercion de el servicios
+    // console.log('AGREGADO EL SERVICIO');
     var idinsert = res.insertId;
     idInd = res.insertId;
-    //obteniendo el horario
-    horarios = horario[0];
-    horarios = horarios.horario;
-    // console.log(horarios);
-        for (var i = 0; i < horarios.length; i++)
+          console.log(data.categoria);
+          if(data.categoria==3)
           {
-              var horas = horarios[i];
-                //console.log(horas.length);
-                if(horas.m_de!=null || horas.t_de!=null )
-                {
-                  horas.id=idinsert;
-                  // console.log('/////////////////******************Horario******************////');
-                  // console.log(horas);
-                    regH.agregarHorario(horas,(err,resp)=>{
-                    //console.log('////////////////*************HORARIO AGREGADO////////////*****************');
-                    respuesta.push(resp);
-                    });
-                }
+            console.log('Creando una Optica');
+            cate = {
+	                 "nombre":"Material Lentes",
+	                 "descripcion":"descripcion categoria",
+	                 "id_provedor":data.id_prov,
+	                 "sucursales":'[]'
+                 };
+
+                 let sqlin = 'INSERT INTO categoria_inv (nombre, descripcion,id_provedor) VALUES (?, ?,?);';
+                 connection.query(sqlin,[cate.nombre,cate.descripcion,cate.id_provedor],(err,respin)=> {
+                   if(err){throw err}
+                   else {
+                     console.log('ok');
+                   }
+                 })
           }
           sqlss = 'INSERT INTO servicios_categoria (servicios_idservicios, categoria_idcategoria) VALUES (?, ?)';
-          console.log('id_Servicio'+idInd+'/*/*/*'+'Id Cate'+data.categoria);
+          // console.log('id_Servicio'+idInd+'/*/*/*'+'Id Cate'+data.categoria);
           connection.query(sqlss,[idInd,data.categoria],(err,row)=>{
           if(err)
           {
@@ -74,6 +76,7 @@ servmodule.save = (data , callback ) => {
           }
           else
           {
+            // console.log('AGREGADA SERVICIO CATEGORIA');
             var p = 1;
             var respons = [];
             for (var i = 0; i < img.length; i++)
@@ -116,6 +119,9 @@ servmodule.save = (data , callback ) => {
 }
 });
 };
+
+
+
 
 
 
