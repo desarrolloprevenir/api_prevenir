@@ -101,8 +101,9 @@ fotoModel.setFotoProv = (foto,callback)=>{
   // var fotos = img[0];
   fotos = img;
   ////console.log(.log(img);
-  var newPath = "src/public/avatars/"+name;
-  var pathView = "/avatars/"+name;
+  var pathView = "/src/public/servicios/"+name;
+  var newPath = 'public/servicios'+name;
+  pathView = pathView;
   ba64.writeImageSync(newPath, fotos);
   if(!fs.existsSync(newPath))
   {
@@ -158,8 +159,9 @@ fotoModel.fotoPagina = (fotos,callback) => {
           var rand3 = rn(options);
           var name = rand1+'_'+rand2+'_'+rand3;
 
-          var newPath = "src/public/fotos/"+name;
-          var pathView = "/fotos/"+name;
+          var pathView = "/src/public/servicios/"+name;
+          var newPath = 'public/servicios'+name;
+          pathView = pathView;
           console.log(foto.categ);
           ba64.writeImageSync(newPath, foto.foto);
           console.log('cargada fotos');
@@ -274,8 +276,9 @@ foto = fotoss[i];
   // var fotos = img[0];
   fotos = img;
   ////console.log(.log(img);
-  var newPath = "src/public/servicios/"+name;
-  var pathView = "/servicios/"+name;
+  var pathView = "/src/public/servicios/"+name;
+  var newPath = 'public/servicios'+name;
+  pathView = pathView;
   ba64.writeImageSync(newPath, fotos);
   if(!fs.existsSync(newPath+'jpeg'))
   {
@@ -341,8 +344,9 @@ var name = rand1+'_'+rand2+'_'+rand3;
 // var fotos = img[0];
 fotos = img;
 ////console.log(.log(img);
-var newPath = "src/public/avatars/"+name;
-var pathView = "http://cdn.prevenirexpress.com:3000/avatars/"+name;
+var pathView = "/src/public/servicios/"+name;
+var newPath = 'public/servicios'+name;
+pathView = pathView;
 ba64.writeImageSync(newPath, fotos);
 if(!fs.existsSync(newPath))
 {
