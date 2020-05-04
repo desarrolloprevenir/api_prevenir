@@ -37,8 +37,9 @@ var name = rand1+'_'+rand2+'_'+rand3;
 // var fotos = img[0];
 fotos = img;
 ////console.log(.log(img);
-var newPath = 'public/avatars'+name;
+var newPath = 'public/avatars/'+name;
 var pathView = "http://cdn.prevenirexpress.com/src/public/avatars/"+name;
+console.log(newPath);
 ba64.writeImageSync(newPath, fotos);
 if(!fs.existsSync(newPath))
 {
@@ -102,8 +103,8 @@ fotoModel.setFotoProv = (foto,callback)=>{
   // var fotos = img[0];
   fotos = img;
   ////console.log(.log(img);
-  var pathView = "/src/public/servicios/"+name;
-  var newPath = 'public/servicios'+name;
+  var pathView = "/src/public/avatars/"+name;
+  var newPath = 'public/avatars'+name;
   pathView = pathView;
   ba64.writeImageSync(newPath, fotos);
   if(!fs.existsSync(newPath))
@@ -160,8 +161,8 @@ fotoModel.fotoPagina = (fotos,callback) => {
           var rand3 = rn(options);
           var name = rand1+'_'+rand2+'_'+rand3;
 
-          var pathView = "/src/public/servicios/"+name;
-          var newPath = 'public/servicios'+name;
+          var pathView = "/src/public/fotos/"+name;
+          var newPath = 'public/fotos'+name;
           pathView = pathView;
           console.log(foto.categ);
           ba64.writeImageSync(newPath, foto.foto);

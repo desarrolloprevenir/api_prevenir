@@ -91,7 +91,7 @@ servmodule.save = (data , callback ) => {
             var name = data.nombre +'_'+rand+data.duracion+'_'+idinsert+rand
             var fotos = foto.base64Image;
             var pathView = "/src/public/servicios/"+name;
-            var newPath = 'public/servicios'+name;
+            var newPath = '/public/servicios'+name;
             pathView = pathView;
             ba64.writeImageSync(newPath, fotos);
             var fotoe = {
