@@ -39,7 +39,7 @@ fotos = img;
 ////console.log(.log(img);
 var pathView = "/src/public/servicios/"+name;
 var newPath = 'public/servicios'+name;
-var pathView = "http://cdn.prevenirexpress.com/avatars/"+name;
+var pathView = "http://cdn.prevenirexpress.com/src/public/avatars/"+name;
 ba64.writeImageSync(newPath, fotos);
 if(!fs.existsSync(newPath))
 {
