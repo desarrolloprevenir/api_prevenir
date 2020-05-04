@@ -20,7 +20,7 @@ var app = express();
 //middleawares
 
 app.use(morgan('dev'));
-app.use(express.static('src/public'));
+app.use(express.static('src/public' ));
 app.use(bodyparser.json({limit: '50mb'}));
 //app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyparser.urlencoded({limit: '50mb', extended: true}));
