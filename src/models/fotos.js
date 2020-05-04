@@ -37,8 +37,7 @@ var name = rand1+'_'+rand2+'_'+rand3;
 // var fotos = img[0];
 fotos = img;
 ////console.log(.log(img);
-var pathView = "/src/public/servicios/"+name;
-var newPath = 'public/servicios'+name;
+var newPath = 'public/avatars'+name;
 var pathView = "http://cdn.prevenirexpress.com/src/public/avatars/"+name;
 ba64.writeImageSync(newPath, fotos);
 if(!fs.existsSync(newPath))
@@ -70,8 +69,8 @@ var name = rand1+'_'+rand2+'_'+rand3;
 // var fotos = img[0];
 fotos = img;
 ////console.log(.log(img);
-var pathView = "/src/public/servicios/"+name;
-var newPath = 'public/servicios'+name;
+var pathView = "/src/public/avatars/"+name;
+var newPath = 'public/avatars'+name;
 pathView = pathView;
 ba64.writeImageSync(newPath, fotos);
 if(!fs.existsSync(newPath))
