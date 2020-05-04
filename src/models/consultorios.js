@@ -53,7 +53,7 @@ consulModule.insertConsul1 = (consuls, callback) =>
 console.log('agregando consultorios');
 console.log(consuls);
 var id_sucur = consuls[0].id_sucursal;
-consuls.shift(consuls);
+// consuls.shift(consuls);
 console.log();
 console.log('ID DE LA SUSRSAL');
 console.log(id_sucur);
@@ -61,13 +61,13 @@ if(connection)
 {
   var p = 0;
   var sch=[]
-  // console.log('CONSULS DENTRO DE AGREGAR CONSULTORIOS');
+  console.log('CONSULS DENTRO DE AGREGAR CONSULTORIOS');
 
   let medicos = [];
   var sql = 'INSERT INTO consultorio (nombre, extencion, medico_id, id_sucursales, id_servicios) VALUES (?, ?, ?, ?, ?);';
   var horarios = [];
-  // console.log('AGREGANDO CONSULTORIO');
-
+  console.log('AGREGANDO CONSULTORIO');
+  console.log(consuls);
   forEach(consuls, function(consul, index, arr)
 {
   console.log('dentro del for each');
