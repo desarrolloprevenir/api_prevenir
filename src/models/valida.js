@@ -113,6 +113,26 @@ validamodel.validaMedico = (vali,callback) =>{
   }
 };
 
+validamodel.validaCorreo = (email,callback) => {
+  if(connection)
+  {
+    let sql = 'SELECT * FROM members WHERE email = ?;';
+    connection.query(sql,[email],(err,resp)=>{
+      if(err){throw err}
+      else
+      {
+        if (JSON.stringify(resp)=='[]')
+        {
+          callback(null,true);
+        }
+        else
+        {
+          callback(null,false);
+        }
+      }
+    })
+  }
+};
 
 
 

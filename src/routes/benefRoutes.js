@@ -1,5 +1,6 @@
 const benef = require('../models/beneficiarios');
 const jwts = require('../models/jwt');
+const validas = require('../models/valida');
 module.exports = function (app)
 {
 
@@ -29,6 +30,14 @@ app.post('/benef',jwts.valida,(req,res)=>{
   // console.log(req.body);
   benef.agregarBeneficiario(bene,(err,resp)=>{
     res.json(resp);
+  });
+});
+
+app.post('/valcorreo',(req,resp)=>{
+  let correo = req.body;
+  console.log(correo);
+  validas.validaCorreo(correo,(err,res)=>{
+    resp.json(res)
   });
 });
 
