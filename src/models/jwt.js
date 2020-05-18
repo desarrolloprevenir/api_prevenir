@@ -250,9 +250,9 @@ return res.status(305).send({'mensaje':'error al validar ususario'});
 };
 
 jwtmodel.confirmaCuenta = (salt,callback)=>{
-  let con = 'SELECT salt FROM members Where id = ? AND salt = ?;'
+  let con = 'SELECT id FROM members Where salt = ?;'
   console.log(salt);
-  connection.query(con,[salt.id,salt.salt],(err,res)=>{
+  connection.query(con,[salt.salt],(err,res)=>{
     if(err){throw err}
     else
     {
@@ -260,7 +260,7 @@ jwtmodel.confirmaCuenta = (salt,callback)=>{
       if(JSON.stringify(res)!='[]')
       {
         let upt = 'UPDATE members SET locked = 1 WHERE (id =?);'
-        connection.query(upt,[salt.id],(err,resp)=>{
+        connection.query(upt,[res.id],(err,resp)=>{
           if(err){throw err}
           else
           {
