@@ -251,8 +251,8 @@ return res.status(305).send({'mensaje':'error al validar ususario'});
 
 jwtmodel.confirmaCuenta = (salt,callback)=>{
   let con = 'SELECT id FROM members Where salt = ?;'
-  console.log(salt);
-  console.log(salt.salt);
+  // console.log(salt);
+  // console.log(salt.salt);
   connection.query(con,[salt.salt],(err,res)=>{
     if(err){throw err}
     else
@@ -266,7 +266,7 @@ jwtmodel.confirmaCuenta = (salt,callback)=>{
           if(err){throw err}
           else
           {
-            console.log(resp);
+            // console.log(resp);
             callback(null,true);
 
           }
