@@ -359,7 +359,7 @@ ejectModel.cambioSalt = (id,callback)=>{
 ejectModel.cambioContra = (id,callback)=>{
   if(connection)
   {
-    var sel = 'SELECT members.*, usuarios.telefono FROM members, usuarios WHERE members.id = usuarios.members_id  AND email = ? ;';
+    var sel = 'SELECT members.* FROM members WHERE email = ? ;';
     var upd = 'UPDATE members SET salt_contra = ? WHERE (id = ?);';
     connection.query(sel,[id],(err,res)=>{
       if(err){throw err}
@@ -371,31 +371,201 @@ ejectModel.cambioContra = (id,callback)=>{
       }
       else
        {
-      res = res[0];
-      ciclo.generaSalt((err,gen)=>{
-        cod = gen;
-      });
-      var usu = {
-        to:res.email,
-        pss: cod,
-        id:res.id
-      };
-      let data = {
-        nums:'57'+res.telefono,
-        sms:'su codigo para cambiar de contraseña es '+cod
-      }
-      sms.sendSms(data,(err,smsr)=>{
-        console.log(smsr);
-      email.cuentaBlock (usu,(err,ressp)=>{
-        connection.query(upd,[cod,res.id],(err,resp)=>{
-          if(err){throw err}
-          else
-          {
-            callback(null,true)
-          }
-        });
-      });
-    });
+         res = res[0];
+         let rol = res.admin;
+         ciclo.generaSalt((err,gen)=>{
+           cod = gen;
+         });
+         var usu = {
+           to:res.email,
+           pss: cod,
+           id:res.id
+         };
+         if(rol==='true')
+         {
+           console.log('Es admin');
+           let sqltel = 'SELECT provedores.telefono FROM provedores WHERE correo = ?;';
+           connection.query(sqltel,[res.email],(err,rowt)=>{
+             if(err)
+             {
+            console.log(err);
+            callback(404,{err:'ocurrio un error al relalizar la consulta'});
+             }
+             else
+             {
+               console.log(rowt);
+               rowt = JSON.stringify(rowt[0].telefono);
+               console.log(rowt);
+               console.log(rowt.substr(0,1));
+               let data = {
+                 nums:'57'+rowt,
+                 sms:'su codigo en DESCUENTOS MEDICOS PREVENIR EXPRESS para cambiar de contraseña es '+cod
+               }
+               if(rowt.substr(0,1)==3)
+               {
+                 console.log('Si es celular');
+                   sms.sendSms(data,(err,smsr)=>{
+                     console.log(sms);
+                   email.cuentaBlock (usu,(err,ressp)=>{
+                     connection.query(upd,[cod,res.id],(err,resp)=>{
+                       if(err){throw err}
+                       else
+                       {
+                         callback(null,{sms:true,email:true})
+                       }
+                     });
+                   });
+                 });
+               }
+               else
+               {
+                 email.cuentaBlock (usu,(err,ressp)=>{
+                   connection.query(upd,[cod,res.id],(err,resp)=>{
+                     if(err){throw err}
+                     else
+                     {
+                       callback(null,{sms:false,email:true})
+                     }
+                   });
+                 });
+               }
+             }
+           });
+         }
+         else if(rol==='false')
+         {
+           console.log('es usuario');
+           let sqltel = 'SELECT usuarios.telefono FROM usuarios WHERE correo = ? limit 1;';
+           connection.query(sqltel,[res.email],(err,rowt)=>{
+             if(err)
+             {
+            console.log(err);
+            callback(404,{err:'ocurrio un error al relalizar la consulta'});
+             }
+             else
+             {
+               console.log(rowt);
+               rowt = JSON.stringify(rowt[0].telefono);
+               console.log('vemos el telefono');
+               console.log(rowt);
+               console.log(rowt.substr(0,1));
+
+               if(rowt.substr(0,1)==3)
+               {
+                 let data = {
+                   nums:'57'+rowt,
+                   sms:'su codigo en DESCUENTOS MEDICOS PREVENIR EXPRESS para cambiar de contraseña es '+cod
+                 }
+                 console.log('Si es celular');
+                   sms.sendSms(data,(err,smsr)=>{
+                     console.log(sms);
+                   email.cuentaBlock (usu,(err,ressp)=>{
+                     connection.query(upd,[cod,res.id],(err,resp)=>{
+                       if(err){throw err}
+                       else
+                       {
+                         callback(null,{sms:true,email:true})
+                       }
+                     });
+                   });
+                 });
+               }
+               else
+               {
+                 email.cuentaBlock (usu,(err,ressp)=>{
+                   connection.query(upd,[cod,res.id],(err,resp)=>{
+                     if(err){throw err}
+                     else
+                     {
+                       callback(null,{sms:false,email:true})
+                     }
+                   });
+                 });
+               }
+             }
+           });
+         }
+         else if(rol==='medico')
+         {
+           console.log('es medico');
+           let sqltel = 'SELECT medicos.telefono FROM medicos WHERE email = ? limit 1;';
+           connection.query(sqltel,[res.email],(err,rowt)=>{
+             if(err)
+             {
+            console.log(err);
+            callback(404,{err:'ocurrio un error al relalizar la consulta'});
+             }
+             else
+             {
+               console.log(rowt);
+               rowt = JSON.stringify(rowt[0].telefono);
+               console.log(rowt);
+               console.log(rowt.substr(0,1));
+
+               if(rowt.substr(0,1)==3)
+               {
+                 let data = {
+                   nums:'57'+rowt,
+                   sms:'su codigo en DESCUENTOS MEDICOS PREVENIR EXPRESS para cambiar de contraseña es '+cod
+                 }
+                 console.log('Si es celular');
+                   sms.sendSms(data,(err,smsr)=>{
+                     console.log(sms);
+                   email.cuentaBlock (usu,(err,ressp)=>{
+                     connection.query(upd,[cod,res.id],(err,resp)=>{
+                       if(err){throw err}
+                       else
+                       {
+                         callback(null,{sms:true,email:true})
+                       }
+                     });
+                   });
+                 });
+               }
+               else
+               {
+                 email.cuentaBlock (usu,(err,ressp)=>{
+                   connection.query(upd,[cod,res.id],(err,resp)=>{
+                     if(err){throw err}
+                     else
+                     {
+                       callback(null,{sms:false,email:true})
+                     }
+                   });
+                 });
+               }
+
+               //fin if y else
+             }
+           });
+
+         }
+         else if(rol==='sucu')
+         {
+           console.log('es sucursal');
+           callback(null,{sms:false,email:false,msj:'comuniquese con el provedor para cambiar su contraseña'})
+         }
+      // var usu = {
+      //   to:res.email,
+      //   pss: cod,
+      //   id:res.id
+      // };
+      // let data = {
+      //   nums:'57'+res.telefono,
+      //   sms:'su codigo para cambiar de contraseña es '+cod
+      // }
+    //   sms.sendSms(data,(err,smsr)=>{
+    //     console.log(smsr);
+    //   email.cuentaBlock (usu,(err,ressp)=>{
+    //     connection.query(upd,[cod,res.id],(err,resp)=>{
+    //       if(err){throw err}
+    //       else
+    //       {
+    //         callback(null,true)
+    //       }
+    //     });
+    //   });
+    // });
       }
       }
     });
@@ -415,7 +585,7 @@ ejectModel.aceptaContra = (dts,callback)=> {
         // console.log(row.affectedRows);
         if(row.affectedRows>=1)
         {
-                  callback(null,true);
+          callback(null,true);
         }
         else {
           callback(null,false);

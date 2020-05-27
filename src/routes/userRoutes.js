@@ -65,6 +65,7 @@ res.json(resp);
 }
 });
 });
+
 //comprueba los datos faltantes de los usuasrios
 app.get('/datos/:id',(req,res)=>{
 var id = req.params.id;

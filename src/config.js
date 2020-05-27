@@ -26,6 +26,6 @@ module.exports = {
     user: 'contactoprevenir@gmail.com',
     clientId: '341533553404-8c80hnqevdbaqqtis9plp0ikirklj9in.apps.googleusercontent.com',
     clientSecret: 'Fprtjhp-rvVNGAJkRKv-Fv-G',
-    refreshToken: '1//043s9q0dFsTSHCgYIARAAGAQSNwF-L9IrB9V9T4bliBAX4uAdDsu6aSmmcTCGIYP0yN17qHAmPSSFj7UM5uj3E0LAmedPkpT4s5o',
-    accessToken: 'ya29.a0AfH6SMA0O4vqAG6sz3NlzJraevvp3x0LUViCN0xYjbnh9E5XUFA7cAndze_Z65pJh6Yqmj9TmvDDZrh9J7fpU_uw7pmruLqsB4jvZO4jf8losrpCNboxJZLTmoPt3giPwJKsIlDIuZ17x_may3grr80mqb-A9UmB6jI'
+    refreshToken: '1//047bg028n-cGBCgYIARAAGAQSNwF-L9Ir1CQOuWLXsz7-KNeDHIOFxQjMH2L7z0e--mVPFwiCJdVa__x363V-YOeKi5rWFvrMJeE',
+    accessToken: 'ya29.a0AfH6SMBLIVg1O6QkfROMFs5fBUS1i1Wh4zqrNp59TczGYZszTdPFFDHgHufTk__knPEmXSOCR0z1jyvCDIYKET2ndcH9-FAjd0gY6r4r_NPEaMWwdmgqFlJzfXywn7PFhbAh-C1zwkNh_-9Lz4NXalUbOtFeYbs1z7s'
 };
