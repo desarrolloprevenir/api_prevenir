@@ -17,7 +17,7 @@ module.exports = {
     jwt_secreto: 'Frth760bBn6Ju89GZgO24FTgLSCTSAS30a0tDr',
     mailserv: 'gmail',
     userMail: 'correos@contacto-prevenir.iam.gserviceaccount.com',
-    passMail: 'Contactop1321',
+    passMail: 'prevenirr2020+',
     from: 'remitenteEnvio <Contactop1234>',
     host: 'smtp.gmail.com',
     //onesignal
@@ -26,6 +26,6 @@ module.exports = {
     user: 'contactoprevenir@gmail.com',
     clientId: '341533553404-8c80hnqevdbaqqtis9plp0ikirklj9in.apps.googleusercontent.com',
     clientSecret: 'Fprtjhp-rvVNGAJkRKv-Fv-G',
-    refreshToken: '1//04lYXjm1IETnJCgYIARAAGAQSNwF-L9IrXbHd8y3o4h0VgRkWZM3Y-hpeuVK--IzJKfSVFxC2NnXrqMUnUw0Sk6wa3eeCWMEyFn8',
-    accessToken: 'ya29.a0Adw1xeU3qN6YuQaFpr3TSrsFQHCYFeD4lZEqdcXKmMCW_34MCeeSEWxXoxwHs4UR7SSfTtIlbkTVjvCpBl5hVsHj4Seruru21PjFz2y1CU0OGWVvapei7lfjrMYjG04xRVmk_B2PBeJ1rSuouliO-5hc7GF11RqQJTM'
+    refreshToken: '1//043s9q0dFsTSHCgYIARAAGAQSNwF-L9IrB9V9T4bliBAX4uAdDsu6aSmmcTCGIYP0yN17qHAmPSSFj7UM5uj3E0LAmedPkpT4s5o',
+    accessToken: 'ya29.a0AfH6SMA0O4vqAG6sz3NlzJraevvp3x0LUViCN0xYjbnh9E5XUFA7cAndze_Z65pJh6Yqmj9TmvDDZrh9J7fpU_uw7pmruLqsB4jvZO4jf8losrpCNboxJZLTmoPt3giPwJKsIlDIuZ17x_may3grr80mqb-A9UmB6jI'
 };

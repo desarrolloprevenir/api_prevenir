@@ -264,13 +264,15 @@ jwtmodel.confirmaCuenta = (salt,callback)=>{
           if(err){throw err}
           else
           {
-            callback(null,true);
+            console.log(err);
+            callback(null,false);
+
           }
         });
       }
       else
       {
-        callback(null,false);
+        callback(null,true);
       }
     }
   });
