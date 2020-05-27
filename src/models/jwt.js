@@ -262,19 +262,19 @@ jwtmodel.confirmaCuenta = (salt,callback)=>{
       if(JSON.stringify(res)!='[]')
       {
         let upt = 'UPDATE members SET locked = 1 WHERE (id =?);'
-        connection.query(upt,[res.id],(err,resp)=>{
+        connection.query(upt,[salt.id],(err,resp)=>{
           if(err){throw err}
           else
           {
-            console.log(err);
-            callback(null,false);
+            console.log(resp);
+            callback(null,true);
 
           }
         });
       }
       else
       {
-        callback(null,true);
+        callback(null,false);
       }
     }
   });
