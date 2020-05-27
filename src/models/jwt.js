@@ -252,10 +252,12 @@ return res.status(305).send({'mensaje':'error al validar ususario'});
 jwtmodel.confirmaCuenta = (salt,callback)=>{
   let con = 'SELECT id FROM members Where salt = ?;'
   console.log(salt);
+  console.log(salt.salt);
   connection.query(con,[salt.salt],(err,res)=>{
     if(err){throw err}
     else
     {
+      console.log('respuesta de el query');
       console.log(res);
       if(JSON.stringify(res)!='[]')
       {
