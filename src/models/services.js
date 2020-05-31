@@ -82,7 +82,7 @@ servmodule.save = (data, callback) => {
                         var name = data.nombre + '_' + rand + data.duracion + '_' + idinsert + rand
                         var fotos = foto.base64Image;
                         var pathView = "/servicios/" + name;
-                        var newPath = 'public/servicios/' + name;
+                        var newPath = 'src/public/servicios/' + name;
                         pathView = pathView;
                         ba64.writeImageSync(newPath, fotos);
                         var fotoe = {
@@ -140,6 +140,8 @@ servmodule.DarServiceUsu = (ids, callback) => {
                         // console.log('ID SERVICIO');
                         // console.log(id);
                         connection.query(sql1, [id], (err, ft) => {
+                            console.log('********************************************* ver');
+                            console.log(ft);
                             if (err) { throw err } else {
                                 // console.log('DENTRO DEL QUERY');
                                 // console.log(id);
