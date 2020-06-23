@@ -36,8 +36,8 @@ servmodule.save = (data, callback) => {
     var p = 0;
     var mensaje = [];
     var cliente = data.precio * ((100 - data.descuento) / 100);
-    var sql = 'INSERT INTO servicios(nombre,descripcion,duracion,max_citas_ves,video,precio,descuento,precio_cliente_prevenir,id_provedores,creadoPor, palabras_clave) values (?,?,?,?,?,?,?,?,?,?,?);';
-    connection.query(sql, [data.nombre, data.descripcion, data.duracion, data.max_citas, data.video, data.precio, data.descuento, cliente, data.id_prov, data.creado, data.chips], (err, res) => {
+    var sql = 'INSERT INTO servicios(nombre,descripcion,duracion,max_citas_ves,video,precio,descuento,precio_cliente_prevenir,id_provedores,creadoPor) values (?,?,?,?,?,?,?,?,?,?);';
+    connection.query(sql, [data.nombre, data.descripcion, data.duracion, data.max_citas, data.video, data.precio, data.descuento, cliente, data.id_prov, data.creado], (err, res) => {
         if (err) {
             throw err
         } else {
