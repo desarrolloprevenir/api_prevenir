@@ -54,7 +54,7 @@ module.exports = function(app) {
         });
     });
 
-    //retorna los servicios segun el id del provedor
+    // Retorna los servicios segun el id del provedor
     app.get('/services/:id', (req, res) => {
         console.log('dar servicio por id de provedor');
         var id = req.params.id;

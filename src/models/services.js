@@ -41,11 +41,40 @@ servmodule.save = (data, callback) => {
         if (err) {
             throw err
         } else {
+
+
+            // console.log('CHIPSSSSS', data.chips);
+            // Agregar palabras clave
+            if (data.chips.length >= 1) {
+
+                // console.log('CHIPSSSSS DENTRO DEL IF');
+
+                for (let i = 0; i < data.chips.length; i++) {
+                    // data.chips[i].servicios_id_servicios = res.insertId;
+                    // console.log('DESPUES DEL FOR', data.chips);
+                    let sqlChips = "INSERT INTO palabras_clave (palabra_clave, servicios_id_servicios) values (?,?);";
+
+                    connection.query(sqlChips, [data.chips[i].nombre, res.insertId], (err, result) => {
+
+                        if (err) {
+                            // console.log('fallo insersion palabras clave');
+                            throw err;
+                        }
+                        // console.log('registro palabras clave exitoso', result);
+                    });
+
+                }
+
+
+
+            }
+
+
             // id de insercion de el servicios
-            // console.log('AGREGADO EL SERVICIO');
+            // console.log('AGREGADO EL SERVICIO', res);
             var idinsert = res.insertId;
             idInd = res.insertId;
-            console.log(data.categoria);
+            // console.log(data.categoria);
             if (data.categoria == 3) {
                 console.log('Creando una Optica');
                 cate = {
@@ -115,13 +144,14 @@ servmodule.save = (data, callback) => {
 
 
 
-//da servicios por provedor para el listado de el provedor al agregar un servicio o listarlos
+// Da servicios por provedor para el listado de el provedor al agregar un servicio o listarlos
 servmodule.DarServiceUsu = (ids, callback) => {
-    console.log('prueba de servicios')
+    // console.log('prueba de servicios *****************');
     if (connection) {
-        console.log(ids);
+        // console.log(ids);
         var sql = 'SELECT servicios.*, categoria.nombre as categoria,categoria.id_categoria FROM servicios, categoria, servicios_categoria WHERE servicios.id_servicios = servicios_categoria.servicios_idservicios AND servicios_categoria.categoria_idcategoria = categoria.id_categoria AND servicios.id_provedores = ? AND servicios.eliminado = 0 ORDER BY servicios.createdupdate desc;';
         var sel = 'SELECT comentarios.*,usuarios.avatar, CONCAT(usuarios.nombre," ",usuarios.apellidos) as nombre FROM comentarios, consultorio, usuarios WHERE comentarios.id_consultorio = consultorio.id_consultorio AND comentarios.usuarios_id = usuarios.id AND consultorio.id_servicios = ? ORDER BY comentarios.createdAt asc LIMIT 3;';
+
         connection.query(sql, [ids], (err, row) => {
             if (err) {
                 throw err
@@ -166,14 +196,44 @@ servmodule.DarServiceUsu = (ids, callback) => {
                                             callback(null, jsonServ);
                                             //console.log('find de la consulta');
                                         }
-                                        p++
+                                        p++;
                                     }
                                 });
                             }
                         });
+
+                        // Sentencia para obtener las palabras clave de acuerdo al id de un servicio
+                        var sqlChips = 'select palabra_clave from palabras_clave where servicios_id_servicios = ' + id;
+
+                        connection.query(sqlChips, (err, chips) => {
+
+                            if (err) {
+                                throw err;
+                            } else {
+                                // console.log('CHIPSSSSSSSSSS', chips);
+
+                                if (chips.length >= 1) {
+                                    var palabras;
+                                    for (let i = 0; i < chips.length; i++) {
+                                        // palabras = chips[i].palabra_clave;
+                                        if (!palabras) {
+                                            palabras = chips[i].palabra_clave;
+                                        } else {
+                                            palabras = palabras + ' ' + chips[i].palabra_clave;
+                                        }
+                                    }
+
+                                    serv.palabras_clave = palabras;
+                                } else {
+                                    serv.palabras_clave = "";
+                                }
+                            }
+                        });
+
+
                     });
                 } else {
-                    callback(null, [{ 'vacio': true }])
+                    callback(null, [{ 'vacio': true }]);
                 }
             }
         });
@@ -350,8 +410,8 @@ servmodule.darServiciosMunCat = (ids, callback) => {
     //console.log('////////////////Servicios ')
     var idm = ids.idm;
     var idc = ids.idc;
-    console.log('ID DE CATEGORIAS');
-    console.log(idm);
+    // console.log('ID DE CATEGORIAS');
+    // console.log(idm);
     if (connection) {
         if (idc == 0 || idc == '0') {
             console.log('////////////////Servicios por muunicipios/////////// ')
@@ -410,7 +470,42 @@ servmodule.darServiciosMunCat = (ids, callback) => {
                                     });
                                 }
                             });
+
+
+                            // Sentencia para obtener las palabras clave de acuerdo al id de un servicio
+                            var sqlChips = 'select palabra_clave from palabras_clave where servicios_id_servicios = ' + id;
+
+                            connection.query(sqlChips, (err, chips) => {
+
+                                if (err) {
+                                    throw err;
+                                } else {
+                                    // console.log('CHIPSSSSSSSSSS', chips);
+
+                                    if (chips.length >= 1) {
+                                        var palabras;
+                                        for (let i = 0; i < chips.length; i++) {
+                                            // palabras = chips[i].palabra_clave;
+                                            if (!palabras) {
+                                                palabras = chips[i].palabra_clave;
+                                            } else {
+                                                palabras = palabras + ' ' + chips[i].palabra_clave;
+                                            }
+                                        }
+
+                                        serv.palabras_clave = palabras;
+                                    } else {
+                                        serv.palabras_clave = "";
+                                    }
+                                }
+                            });
+
+
                         });
+
+
+
+
                     } else {
                         callback(null, [{ 'vacio': true }])
                     }
