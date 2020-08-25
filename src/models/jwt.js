@@ -75,10 +75,10 @@ else
   var sqlp = 'SELECT medicos.medico_id as ide FROM medicos WHERE medicos.members_id =?;';
   admins=3;
 }
-console.log('QUERY');
-console.log(sqlp);
-console.log('ID');
-console.log(login.id);
+// console.log('QUERY');
+// console.log(sqlp);
+// console.log('ID');
+// console.log(login.id);
 connection.query(sqlp,[login.id],(err,respu)=>{
   if(err){throw err}
   else {

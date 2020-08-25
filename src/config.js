@@ -20,7 +20,9 @@ module.exports = {
     //onesignal
     AuthKey: 'MDE5MGNlOGYtM2IzNC00ZWI5LTgxY2UtYmI3Y2RhZjlhOTJk',
     appId: 'f8e8d04c-0ea4-41cc-b166-63b0bf23bb48',
-    user: 'contactoprevenir@gmail.com',
+    // user: 'contactoprevenir@gmail.com',
+    user: 'contactodescuentosmedicos@gmail.com',
+    pssw: 'Descuentosmedi2020',
     clientId: '341533553404-8c80hnqevdbaqqtis9plp0ikirklj9in.apps.googleusercontent.com',
     clientSecret: 'Fprtjhp-rvVNGAJkRKv-Fv-G',
     refreshToken: '1//045arVwZ-LjqZCgYIARAAGAQSNwF-L9IrHTPVHIgceKr_DAcW1Rq_9474W8rGbb8P9NcqTEpOv557CuXqB6zD_xaS9OQLanNas_k',
