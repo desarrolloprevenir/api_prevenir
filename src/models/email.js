@@ -6,6 +6,26 @@ var moment = require('moment');
 var smtpTransport = require('nodemailer-smtp-transport');
 var connection = require('../controler/connection');
 
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    host: "smtp.gmail.com",
+    // host: "mail.server.com",
+    port: 465,
+    secure: true,
+    auth: {
+        // xoauth2: xoauth2.createXOAuth2Generator({
+        // type: 'OAuth2',
+        user: config.user,
+        pass: config.pssw,
+        // clientId: config.clientId,
+        // clientSecret: config.clientSecret,
+        // refreshToken: config.refreshToken,
+        // accessToken: config.accessToken
+        // })
+
+    }
+});
+
 
 connection = mysql.createConnection({
     host: config.domain,
@@ -18,29 +38,6 @@ connection = mysql.createConnection({
 let emailModel = {};
 
 emailModel.sendMail = (mail, callback) => {
-
-
-
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        // host: "smtp.gmail.com",
-        // host: "mail.server.com",
-        // port: 465,
-        // secure: true,
-        auth: {
-            // xoauth2: xoauth2.createXOAuth2Generator({
-            // type: 'OAuth2',
-            user: config.user,
-            pass: config.pssw,
-            // clientId: config.clientId,
-            // clientSecret: config.clientSecret,
-            // refreshToken: config.refreshToken,
-            // accessToken: config.accessToken
-            // })
-
-        }
-    });
-    //console.lo.log(mail);
 
     var mailOptions = {
         from: mail.remite, //config.from,
@@ -63,26 +60,6 @@ emailModel.sendMail = (mail, callback) => {
 };
 
 emailModel.cuentaBlock = (usu, callback) => {
-    console.log('Si estamos aui');
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        // host: "smtp.gmail.com",
-        // host: "mail.server.com",
-        // port: 465,
-        // secure: true,
-        auth: {
-            // xoauth2: xoauth2.createXOAuth2Generator({
-            // type: 'OAuth2',
-            user: config.user,
-            pass: config.pssw,
-            // clientId: config.clientId,
-            // clientSecret: config.clientSecret,
-            // refreshToken: config.refreshToken,
-            // accessToken: config.accessToken
-            // })
-
-        }
-    });
 
     var mailOptions = {
 
@@ -96,7 +73,7 @@ emailModel.cuentaBlock = (usu, callback) => {
             'en donde encontraras los mejores decuentos medicos de tu ciudad, por favor ingresa este codigo en la aplicacion: <h2>' + usu.pss + '</h2></div>'
     };
 
-    console.log(mailOptions);
+    // console.log(mailOptions);
     transporter.sendMail(mailOptions, function(error, info) {
         if (error) {
             console.log('no se envio');
@@ -112,25 +89,7 @@ emailModel.cuentaBlock = (usu, callback) => {
 };
 
 emailModel.BienvenidoBlock = (usu, callback) => {
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        // host: "smtp.gmail.com",
-        // host: "mail.server.com",
-        // port: 465,
-        // secure: true,
-        auth: {
-            // xoauth2: xoauth2.createXOAuth2Generator({
-            // type: 'OAuth2',
-            user: config.user,
-            pass: config.pssw,
-            // clientId: config.clientId,
-            // clientSecret: config.clientSecret,
-            // refreshToken: config.refreshToken,
-            // accessToken: config.accessToken
-            // })
 
-        }
-    });
     var mailOptions = {
         from: 'PREVENIR EXPRESS', //config.from,
         to: usu.to,
@@ -155,11 +114,6 @@ emailModel.BienvenidoBlock = (usu, callback) => {
 
 
 };
-
-
-
-
-
 
 
 
@@ -208,27 +162,6 @@ emailModel.confirm = (conf, callback) => {
 
 emailModel.sendMailCita = (mail, callback) => {
 
-    // console.log('///**/*/*/*/*/*/*/*/* enviando correro');
-
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        // host: "smtp.gmail.com",
-        // host: "mail.server.com",
-        // port: 465,
-        // secure: true,
-        auth: {
-            // xoauth2: xoauth2.createXOAuth2Generator({
-            // type: 'OAuth2',
-            user: config.user,
-            pass: config.pssw,
-            // clientId: config.clientId,
-            // clientSecret: config.clientSecret,
-            // refreshToken: config.refreshToken,
-            // accessToken: config.accessToken
-            // })
-
-        }
-    });
     //console.lo.log(mail);
     let mailOptions = mail;
 
@@ -383,43 +316,20 @@ emailModel.senCorreos = (mails, callback) => {
 
 emailModel.prueba1 = async(callback) => {
 
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        // host: "smtp.gmail.com",
-        // host: "mail.server.com",
-        // port: 465,
-        // secure: true,
-        auth: {
-            // xoauth2: xoauth2.createXOAuth2Generator({
-            // type: 'OAuth2',
-            user: config.user,
-            pass: config.pssw,
-            // clientId: config.clientId,
-            // clientSecret: config.clientSecret,
-            // refreshToken: config.refreshToken,
-            // accessToken: config.accessToken
-            // })
-
-        }
-    });
-
     var mailOptions = {
         from: "contactoprevenir <contactoprevenir@gmail.com>",
         to: "juankita8911@gmail.com",
         subject: "prueba",
         text: "hola mundo"
-    }
+    };
 
     transporter.sendMail(mailOptions, (err, res) => {
         if (err) { throw err } else {
             console.log(res);
             callback(null, true);
         }
-    })
+    });
 };
-
-
-
 
 
 
