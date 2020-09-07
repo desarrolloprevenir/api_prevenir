@@ -45,7 +45,9 @@ servmodule.save = (data, callback) => {
 
             // console.log('CHIPSSSSS', data.chips);
             // Agregar palabras clave
-            if (data.chips.length >= 1) {
+            if (data.chips && data.chips.length >= 1) {
+
+
 
                 // console.log('CHIPSSSSS DENTRO DEL IF');
 
@@ -67,7 +69,10 @@ servmodule.save = (data, callback) => {
 
 
 
+
+
             }
+
 
 
             // id de insercion de el servicios
