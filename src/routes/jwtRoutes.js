@@ -101,7 +101,7 @@ module.exports = function(app) {
                             });
                         });
                     } else {
-                        // console.log('usuario registrado manualmnete');
+                        console.log('usuario registrado manualmnete', regist);
                         users.registerUsu(regist, (err, dataU) => {
                             jwts.login(regist, (err, datas) => {
                                 //console.log('///////*****////***///*****')
