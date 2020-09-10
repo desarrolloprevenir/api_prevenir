@@ -25,7 +25,8 @@ module.exports = function(app) {
 
     app.post('/smsconfirm', (req, respuesta) => {
 
-        // console.log(req.body.provedor);
+        // console.log('req bodyyyyyyyyyyyyyyyyyyyyyyy', req.body.provedor);
+
         var cod;
         ciclo.generaSalt((err, gen) => {
             cod = gen;
@@ -36,25 +37,30 @@ module.exports = function(app) {
             nums: req.body.celular
         };
 
+        // console.log('dataaaaaaaaaaaaaaaaa', data);
+
         // Si es provedor
-        if (req.body.provedor === 'proveedor') {
-            // console.log(info);
+        if (req.body.usuario === 'proveedor') {
+            // console.log('dentro de provedor');
             provedor.actualizarCelular(info, (err, res) => {
                 // console.log('respuesta del update', res);
                 if (res) {
 
                     sms.sendSms(data, (err, resp) => {
+                        // console.log('reeeeessss provedor sms');
+                        // console.log(resp);
                         respuesta.json(resp);
                     });
                 }
             });
-        } else if (req.body.provedor === 'medico') {
+        } else if (req.body.usuario === 'medico') {
             // SI es médico
 
             // console.log('info medico', info);
             medico.actualizarCelular(info, (err, res) => {
                 // console.log('respuesta del update medico', res);
                 if (res) {
+
                     sms.sendSms(data, (err, resp) => {
                         respuesta.json(resp);
                     });
@@ -64,13 +70,12 @@ module.exports = function(app) {
             // Si es usuario
             usuario.actualizarCelular(info, (err, res) => {
                 if (res) {
+
                     sms.sendSms(data, (err, resp) => {
                         respuesta.json(resp);
                     });
                 }
             });
         }
-
     });
-
 };

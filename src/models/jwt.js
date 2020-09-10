@@ -3,7 +3,7 @@ let config = require('../config');
 let jwts = require('jsonwebtoken');
 let vals = require('./valida');
 let user = require('./user');
-let ciclo = require('../controler/ciclos')
+let ciclo = require('../controler/ciclos');
 let email = require('./email');
 let sms = require('./sms');
 
@@ -18,8 +18,8 @@ let jwtmodel = {};
 
 //realiza el login de los ususarios retorna un token
 jwtmodel.login = (logins, callback) => {
-    console.log('****************************');
-    console.log(logins);
+    // console.log('****************************');
+    // console.log(logins);
     //res.send({'mensaje':'usuario enviado por post'});
     if (connection) {
         var email = logins.email;
@@ -31,8 +31,8 @@ jwtmodel.login = (logins, callback) => {
             if (err) {
                 throw err;
             } else {
-                console.log('////***LOGIN*****///');
-                console.log(row);
+                // console.log('////***LOGIN*****///');
+                // console.log(row);
                 var login = row[0];
                 if (login != null) {
                     //
@@ -76,7 +76,7 @@ jwtmodel.login = (logins, callback) => {
                             let loges = { token: tokenres, login: true, esAdmin: admins, id_usuario: respu.ide, id_member: login.id };
                             // console.log('/////*LOGES**//////');
                             // console.log(idU);
-                            console.log('loggggggeeeeeeeeeeeeeeeeeeeeeeeedddddddddddddddddddsssssssssssss', loges);
+                            // console.log('loggggggeeeeeeeeeeeeeeeeeeeeeeeedddddddddddddddddddsssssssssssss', loges);
 
                             callback(null, loges);
 
@@ -153,13 +153,11 @@ jwtmodel.registroMember = (register, callback) => {
                                 }
                             });
                         });
-
                     }
                 });
             } else {
                 let valido = { mensaje: 'usuario ya exist', existe: 'true' };
                 callback(null, res);
-
             }
         });
     }
@@ -203,8 +201,6 @@ jwtmodel.validaAdmin = (req, res, next) => {
             } else {
                 return res.status(403).send({ 'mensaje': 'error al validar usuario, no es admin' });
             }
-
-
         });
     } else {
         // console.log('no ahy token');
@@ -213,15 +209,15 @@ jwtmodel.validaAdmin = (req, res, next) => {
 };
 
 jwtmodel.confirmaCuenta = (salt, callback) => {
-    let con = 'SELECT id FROM members Where salt = ?;'
-        // console.log(salt);
-        // console.log(salt.salt);
+    let con = 'SELECT id FROM members Where salt = ?;';
+    // console.log(salt);
+    // console.log(salt.salt);
     connection.query(con, [salt.salt], (err, res) => {
         if (err) { throw err } else {
-            console.log('respuesta de el query');
-            console.log(res);
+            // console.log('respuesta de el query');
+            // console.log(res);
             if (JSON.stringify(res) != '[]') {
-                let upt = 'UPDATE members SET locked = 1 WHERE (id =?);'
+                let upt = 'UPDATE members SET locked = 1 WHERE (id =?);';
                 connection.query(upt, [salt.id], (err, resp) => {
                     if (err) { throw err } else {
                         // console.log(resp);

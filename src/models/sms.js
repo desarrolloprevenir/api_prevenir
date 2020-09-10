@@ -17,7 +17,7 @@ let smsModel = {};
 
 
 smsModel.sendSms = (data, callback) => {
-    console.log(data);
+    // console.log(data);
     Request.post({
         "headers": { "content-type": "application/x-www-form-urlencoded" },
         "url": "https://api.hablame.co/sms/envio/",
@@ -29,12 +29,29 @@ smsModel.sendSms = (data, callback) => {
         }
     }, (error, response, body) => {
         if (error) {
-            throw err;
+            throw error;
         }
-        console.dir(JSON.parse(body));
+
+        // console.log('+++++++++++++++++++++++++++++++++++++++SMS++++++++++++++++++++++++++++');
+        // console.dir(JSON.parse(body));
+
+        // let estado = JSON.parse(body);
+        // // console.log(estado.sms);
+        // console.log(response);
+
+        // let resultado = JSON.parse(response.sta);
+        // console.log('+++++++++++++++++++++++++++++++++++++++RESULTADO++++++++++++++++++++++++++++');
+        // console.log(resultado.sms.
+        //     '1'.resultado);
+
+
+
+
+
+        // console.log(JSON.parse(body));
+
         callback(null, body.resultado);
     });
 
 };
-
 module.exports = smsModel;

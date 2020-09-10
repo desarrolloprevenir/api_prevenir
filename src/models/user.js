@@ -108,7 +108,6 @@ userModel.darUserId = (id, callback) => {
                         callback(null, row);
                     }
                 });
-
             }
         });
     }
