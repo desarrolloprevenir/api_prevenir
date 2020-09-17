@@ -81,7 +81,7 @@ module.exports = function(app) {
     });
 
     // Ver info login google
-    app.post('/verInfo', (req, res) => {
+    app.post('/vernfo', (req, res) => {
         console.log(req.body);
         let info = req.body;
         res.status(200).json({
