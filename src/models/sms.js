@@ -54,4 +54,35 @@ smsModel.sendSms = (data, callback) => {
     });
 
 };
+
+smsModel.pruebaApiHablame = (data, callback) => {
+
+    Request.post({
+        "headers": { "content-type": "application/x-www-form-urlencoded" },
+        "url": "https://api101.hablame.co/api/sms/v2.1/send/",
+        "form": {
+            "account": "10017784",
+            "apiKey": "Sv35vgV1LPbuUsPU0uCONoFQ0ud419",
+            "token": "a0a8fa46a12a60900d97851c45a17f4a",
+            "toNumber": data.nums,
+            "sms": data.sms,
+            "isPriority": 0
+        }
+    }, (error, response, body) => {
+        if (error) {
+            throw error;
+        }
+
+        console.log('+++++++++++++++++++++++++++++++++++++++RESPONSE++++++++++++++++++++++++++++');
+        console.log(response);
+
+        console.log('+++++++++++++++++++++++++++++++++++++++BODY++++++++++++++++++++++++++++');
+        console.log(body);
+
+        callback(null, body);
+    });
+
+};
+
+
 module.exports = smsModel;

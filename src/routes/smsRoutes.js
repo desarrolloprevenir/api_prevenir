@@ -9,6 +9,7 @@ const provedor = require('../models/provedores');
 const medico = require('../models/medicos');
 const usuario = require('../models/user');
 const ciclo = require('../controler/ciclos');
+const smsModel = require('../models/sms');
 
 
 module.exports = function(app) {
@@ -22,6 +23,28 @@ module.exports = function(app) {
             res.json(resp);
         });
     });
+
+
+    app.post('/smsprueba', (req, resp) => {
+
+        var data = {
+            nums: req.body.numero,
+            sms: req.body.sms
+        };
+
+        smsModel.pruebaApiHablame(data, (err, res) => {
+
+            if (err) {
+                console.log('error ruta smsprueba', err);
+                throw (err);
+            }
+            // console.log('resssss  route pruebaaaa', res);
+            resp.json(res);
+        });
+
+    });
+
+
 
     app.post('/smsconfirm', (req, respuesta) => {
 
@@ -78,4 +101,7 @@ module.exports = function(app) {
             });
         }
     });
+
+
+
 };
